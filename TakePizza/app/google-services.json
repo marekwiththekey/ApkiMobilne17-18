@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1021042062961",
+    "firebase_url": "https://takepizza-8a7d4.firebaseio.com",
+    "project_id": "takepizza-8a7d4",
+    "storage_bucket": "takepizza-8a7d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021042062961:android:764be0d8adb16763",
+        "android_client_info": {
+          "package_name": "com.example.apch9.takepizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021042062961-lj4hfh7lvdil09h9grlgdl6er560qonl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.apch9.takepizza",
+            "certificate_hash": "b4d57f31ea2a8d9afc3f66e975c820a741cebc0f"
+          }
+        },
+        {
+          "client_id": "1021042062961-74trdeq084b33s9trobjt0n9qak177hj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU6eqtSJhTby8qBG9EWXqVvjy16PBVTiM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021042062961-74trdeq084b33s9trobjt0n9qak177hj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

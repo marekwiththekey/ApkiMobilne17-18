@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button style="@style/BackButton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="40dp">
+            <EditText
+                style="@style/Login"
+                android:id="@+id/etEmail"
+                android:hint="    E-mail"
+                android:inputType="textEmailAddress"
+                />
+
+            <EditText
+                style="@style/Login"
+                android:id="@+id/etPassword"
+                android:hint="    Password"
+                android:inputType="textPassword" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/bSignUp"
+                    style="@style/Button"
+                    android:text="Sign up"
+                    />
+
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"></View>
+
+                <Button
+                    android:id="@+id/bSignIn"
+                    style="@style/Button"
+                    android:text="Sign in"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/colorAccent"></View>
+
+    </LinearLayout>
+</RelativeLayout>

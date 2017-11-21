@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textColor">@color/font</item>
+    </style>
+
+    <style name="StartButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textColor">@color/font</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="BackButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/backbutton</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:foreground">@mipmap/ic_back</item>
+    </style>
+
+    <style name="MenuButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/login</item>
+        <item name="android:layout_width">160dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_gravity">left</item>
+    </style>
+
+    <style name="Login" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/login</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textColor">@color/font</item>
+    </style>
+
+</resources>
