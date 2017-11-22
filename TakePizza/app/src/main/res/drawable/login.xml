@@ -3,5 +3,5 @@
     <stroke
         android:width="10px"
         android:color="@color/loginframe" />
-    <corners android:radius="40px" />
+    <corners android:radius="2000px" />
 </shape>

@@ -1,57 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorbg">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button style="@style/BackButton" />
-    </LinearLayout>
+    android:background="@drawable/temp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:padding="40dp"
         android:gravity="center">
+
+
+        <RelativeLayout     style="@style/LogLayout">
+
+            <ImageView      style="@style/LogImage"/>
+
+            <EditText
+                style="@style/LogEdit"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+            <ImageView      style="@style/LogIcon"
+                android:src="@mipmap/ic_mail"/>
+        </RelativeLayout>
+
+        <RelativeLayout     style="@style/LogLayout">
+
+            <ImageView      style="@style/LogImage"/>
+
+            <EditText       style="@style/LogEdit"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+            <ImageView      style="@style/LogIcon"
+                android:src="@mipmap/ic_lock"/>
+        </RelativeLayout>
+
+        <RelativeLayout     style="@style/LogLayout">
+
+            <ImageView      style="@style/LogImage"/>
+
+            <EditText       style="@style/LogEdit"
+                android:hint="@string/confirm"
+                android:inputType="textPassword" />
+
+            <ImageView      style="@style/LogIcon"
+                android:src="@mipmap/ic_lock"/>
+        </RelativeLayout>
+
+        <RelativeLayout     style="@style/LogLayout">
+
+            <ImageView      style="@style/LogButton"/>
+
+            <TextView       style="@style/LogText"
+                android:text="@string/create" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="40dp">
+            android:gravity="left"
+            android:orientation="horizontal">
 
-            <EditText style="@style/Login"
-                android:hint="    Login"
-                android:inputType="text"
-                />
-
-            <EditText style="@style/Login"
-                android:hint="    Password"
-                android:inputType="textPassword" />
-
-            <EditText style="@style/Login"
-                android:hint="    Confirm Password"
-                android:inputType="textPassword" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginLeft="10dp">
 
-                <View
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"></View>
+                <ImageButton    style="@style/LogLink"
+                    android:id="@+id/bBack"
+                    android:onClick="onMain"/>
 
-                <Button style="@style/Button"
-                    android:text="Sign up"
-                    />
-
-            </LinearLayout>
+                <TextView       style="@style/LogTextLink"
+                    android:text="@string/back" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

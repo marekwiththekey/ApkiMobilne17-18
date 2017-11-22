@@ -1,66 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorbg"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context="com.example.apch9.takepizza.MainActivity">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="40dp">
+        android:layout_height="150dp"
+        android:padding="5dp"
+        android:background="@drawable/temp">
 
-        <LinearLayout
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/bLog" />
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
+            android:text="LOGO"
+            android:background="@color/clwhite"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:textSize="40dp"/>
 
-            <Button
-                style="@style/Button"
-                android:text="Sales"
-                />
-
-            <View
-                android:layout_width="40dp"
-                android:layout_height="match_parent"></View>
-
-            <Button
-                style="@style/Button"
-                android:text="Log"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:contentDescription="Tu bd jakiś obrazek"
-        android:layout_height="300dp"
-        android:background="@color/colorAccent"></View>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="40dp">
-
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="5dp"
+            android:background="@color/button"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
-            <Button
-                style="@style/StartButton"
-                android:text="Start"
-                />
-        </LinearLayout>
-    </LinearLayout>
+    <TabHost
+        android:id="@+id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:animateLayoutChanges="true" />
+
+        <FrameLayout
+            android:layout_marginTop="40dp"
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/Pizzas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:padding="20dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </ListView>
+                </ScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Drinks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                android:padding="20dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    </ListView>
+                </ScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Others"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                android:padding="20dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    </ListView>
+                </ScrollView>
+            </LinearLayout>
+        </FrameLayout>
+    </TabHost>
 </LinearLayout>

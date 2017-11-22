@@ -5,9 +5,12 @@
     <color name="colorAccent">#9c2229</color>
 
     <color name="colorbg">#30352c</color>
-    <color name="font">#ecf0e9</color>
+    <color name="clwhite">#8affffff</color>
+    <color name="clalpha">#00ffffff</color>
+    <color name="font">#fdfdfd</color>
+    <color name="button">#68bc9f</color>
+    <color name="clgrey">#b7cac4</color>
 
-    <color name="button">#292121</color>
     <color name="buttonframe">#974545</color>
 
     <color name="login">#687262</color>

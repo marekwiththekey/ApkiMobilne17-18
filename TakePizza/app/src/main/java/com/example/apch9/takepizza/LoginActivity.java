@@ -1,28 +1,20 @@
 package com.example.apch9.takepizza;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import android.widget.ImageButton;
 
 /**
  * Created by apch9 on 15.11.2017.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends MainActivity {//implements View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
 
     private EditText etEmail;
     private EditText etPassword;
@@ -31,17 +23,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
+        bSkip = (ImageButton)findViewById(R.id.bSkip);
+        bSignUp = (ImageButton)findViewById(R.id.bSignUp);
+        //etEmail = findViewById(R.id.etEmail);
+        //etPassword = findViewById(R.id.etPassword);
 
-        findViewById(R.id.bSignIn).setOnClickListener(this);
+        //findViewById(R.id.bSignIn).setOnClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
+
+        bSignUp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    @Override
+   /*@Override
     public void onStart() {
         super.onStart();
 
@@ -174,15 +176,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.bSignUp) {
-            createAccount(etEmail.getText().toString(), etPassword.getText().toString());
-
+            //createAccount(etEmail.getText().toString(), etPassword.getText().toString());
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         } else if (i == R.id.bSignIn) {
-            signIn(etEmail.getText().toString(), etPassword.getText().toString());
+            //signIn(etEmail.getText().toString(), etPassword.getText().toString());
 
         }
-    }
+    }*/
 }
