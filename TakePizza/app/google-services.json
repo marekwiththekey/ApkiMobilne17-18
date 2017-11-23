@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1021042062961-76vfrqpri5kmj9e321e31b6kflbsjlbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.apch9.takepizza",
+            "certificate_hash": "a093a74c5dae8fb63f088851e032e5b38024354e"
+          }
+        },
+        {
           "client_id": "1021042062961-lj4hfh7lvdil09h9grlgdl6er560qonl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

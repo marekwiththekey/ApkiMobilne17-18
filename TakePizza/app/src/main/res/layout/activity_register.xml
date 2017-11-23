@@ -8,53 +8,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="40dp"
-        android:gravity="center">
+        android:padding="40dp">
 
 
-        <RelativeLayout     style="@style/LogLayout">
+        <RelativeLayout style="@style/LogLayout">
 
-            <ImageView      style="@style/LogImage"/>
+            <ImageView style="@style/LogImage" />
 
             <EditText
+                android:id="@+id/etEmail"
                 style="@style/LogEdit"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
-            <ImageView      style="@style/LogIcon"
-                android:src="@mipmap/ic_mail"/>
+            <ImageView
+                style="@style/LogIcon"
+                android:src="@mipmap/ic_mail" />
         </RelativeLayout>
 
-        <RelativeLayout     style="@style/LogLayout">
+        <RelativeLayout style="@style/LogLayout">
 
-            <ImageView      style="@style/LogImage"/>
+            <ImageView style="@style/LogImage" />
 
-            <EditText       style="@style/LogEdit"
+            <EditText
+                android:id="@+id/etPassword"
+                style="@style/LogEdit"
                 android:hint="@string/password"
                 android:inputType="textPassword" />
 
-            <ImageView      style="@style/LogIcon"
-                android:src="@mipmap/ic_lock"/>
+            <ImageView
+                style="@style/LogIcon"
+                android:src="@mipmap/ic_lock" />
         </RelativeLayout>
 
-        <RelativeLayout     style="@style/LogLayout">
+        <RelativeLayout style="@style/LogLayout">
 
-            <ImageView      style="@style/LogImage"/>
+            <ImageView style="@style/LogImage" />
 
-            <EditText       style="@style/LogEdit"
+            <EditText
+                android:id="@+id/etConfirmPassword"
+                style="@style/LogEdit"
                 android:hint="@string/confirm"
                 android:inputType="textPassword" />
 
-            <ImageView      style="@style/LogIcon"
-                android:src="@mipmap/ic_lock"/>
+            <ImageView
+                style="@style/LogIcon"
+                android:src="@mipmap/ic_lock" />
         </RelativeLayout>
 
-        <RelativeLayout     style="@style/LogLayout">
+        <RelativeLayout style="@style/LogLayout">
 
-            <ImageView      style="@style/LogButton"/>
+            <ImageView style="@style/LogButton" />
 
-            <TextView       style="@style/LogText"
+            <TextView
+                android:id="@+id/tvCreateAccount"
+                style="@style/LogText"
                 android:text="@string/create" />
         </RelativeLayout>
 
@@ -69,14 +81,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp">
 
-                <ImageButton    style="@style/LogLink"
+                <ImageButton
                     android:id="@+id/bBack"
-                    android:onClick="onMain"/>
+                    style="@style/LogLink"
+                    android:onClick="onMain" />
 
-                <TextView       style="@style/LogTextLink"
+                <TextView
+                    style="@style/LogTextLink"
                     android:text="@string/back" />
             </RelativeLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
