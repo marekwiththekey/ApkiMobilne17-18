@@ -3,7 +3,6 @@ package com.example.apch9.takepizza;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -11,7 +10,7 @@ import android.widget.ImageButton;
  * Created by apch9 on 15.11.2017.
  */
 
-public class LoginActivity extends MainActivity {//implements View.OnClickListener {
+public class LoginActivity extends Main1Activity {//implements View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
     //private FirebaseAuth mAuth;
