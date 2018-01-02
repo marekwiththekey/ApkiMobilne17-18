@@ -5,88 +5,92 @@
     android:layout_height="match_parent"
     android:background="@drawable/temp">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="40dp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_marginBottom="60dp"
-                android:text="LOGO"
-                android:background="@color/clwhite"
-                android:gravity="center"
-                android:textSize="40dp"/>
-
-            <RelativeLayout     style="@style/LogLayout">
-
-                <ImageView      style="@style/LogImage"/>
-
-                <EditText       style="@style/LogEdit"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress" />
-
-                <ImageView      style="@style/LogIcon"
-                    android:src="@mipmap/ic_mail"/>
-            </RelativeLayout>
-
-            <RelativeLayout     style="@style/LogLayout">
-
-                <ImageView      style="@style/LogImage"/>
-
-                <EditText       style="@style/LogEdit"
-                    android:hint="@string/password"
-                    android:inputType="textPassword" />
-
-                <ImageView      style="@style/LogIcon"
-                    android:src="@mipmap/ic_lock"/>
-            </RelativeLayout>
-
-            <RelativeLayout     style="@style/LogLayout">
-
-                <ImageView      style="@style/LogButton"/>
-
-                <TextView       style="@style/LogText"
-                    android:text="@string/start" />
-            </RelativeLayout>
-
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="40dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:onClick="onView">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="LOGO"
+                    android:background="@color/clwhite"
+                    android:gravity="center"
+                    android:textSize="40dp"/>
 
-                    <ImageButton       style="@style/LogLink"
-                        android:id="@+id/bSignUp"/>
+                <RelativeLayout     style="@style/LogLayout">
 
-                    <TextView       style="@style/LogTextLink"
-                        android:text="@string/create" />
+                    <ImageView      style="@style/LogImage"/>
+
+                    <EditText       style="@style/LogEdit"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress" />
+
+                    <ImageView      style="@style/LogIcon"
+                        android:src="@mipmap/ic_mail"/>
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"></View>
+                <RelativeLayout     style="@style/LogLayout">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    <ImageView      style="@style/LogImage"/>
 
-                    <ImageButton       style="@style/LogLink"
-                        android:id="@+id/bForgo"/>
+                    <EditText       style="@style/LogEdit"
+                        android:hint="@string/password"
+                        android:inputType="textPassword" />
 
-                    <TextView       style="@style/LogTextLink"
-                        android:text="@string/forgot" />
+                    <ImageView      style="@style/LogIcon"
+                        android:src="@mipmap/ic_lock"/>
                 </RelativeLayout>
-            </LinearLayout>
-    </LinearLayout>
 
+                <RelativeLayout     style="@style/LogLayout">
+
+                    <ImageView      style="@style/LogButton"/>
+
+                    <TextView       style="@style/LogText"
+                        android:text="@string/start" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton       style="@style/LogLink"
+                            android:id="@+id/bSignUp"/>
+
+                        <TextView       style="@style/LogTextLink"
+                            android:text="@string/create" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"></View>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton       style="@style/LogLink"
+                            android:id="@+id/bForgo"/>
+
+                        <TextView       style="@style/LogTextLink"
+                            android:text="@string/forgot" />
+                    </RelativeLayout>
+                </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
     <RelativeLayout        style="@style/SkipLayout">
 
         <ImageButton       style="@style/SkipButton"

@@ -1,9 +1,11 @@
 package com.example.apch9.takepizza;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TabHost;
@@ -58,7 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMain(View view) {
         finish();
+    }
 
+    public void onView(View view) {
+        View onview = this.getCurrentFocus();
+        if (onview != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override

@@ -77,9 +77,10 @@ public class RegisterActivity extends MainActivity {
 //            alertDialog.setTitle("Invalid password!");
 //            alertDialog.setMessage("Password and/or Confirm Password fields are invalid.\nValid password should be at least 6 characters long.");
 //            alertDialog.show();
-            Toast toast = Toast.makeText(getApplicationContext(),"Invalid password: minimum length is 6 characters long.",Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP|Gravity.LEFT, 100, 500);
-            toast.show();
+//            Toast toast = Toast.makeText(getApplicationContext(),"Invalid password: minimum length is 6 characters long.",Toast.LENGTH_LONG);
+//            toast.setGravity(Gravity.TOP|Gravity.LEFT, 100, 500);
+//            toast.show();
+            etPassword.setError("fail");
         } else {
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirm)) {
@@ -109,4 +110,6 @@ public class RegisterActivity extends MainActivity {
 
         }
     }
+
+
 }
