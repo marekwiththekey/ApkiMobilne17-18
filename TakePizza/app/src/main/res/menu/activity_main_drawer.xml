@@ -26,5 +26,13 @@
                 android:title="Account" />
         </menu>
     </item>
+    <item android:title="Logout">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@mipmap/ac_icon"
+                android:title="Logout" />
+        </menu>
+    </item>
 
 </menu>

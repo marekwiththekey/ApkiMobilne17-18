@@ -23,12 +23,14 @@
 
         <RelativeLayout style="@style/LogLayout">
 
-            <ImageView style="@style/LogImage" />
-
             <EditText
+                android:id="@+id/loginEmail"
                 style="@style/LogEdit"
+                android:layout_alignParentBottom="true"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress" />
+
+            <ImageView style="@style/LogImage" />
 
             <ImageView
                 style="@style/LogIcon"
@@ -42,11 +44,13 @@
             <EditText
                 style="@style/LogEdit"
                 android:hint="@string/password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:id="@+id/loginPassword" />
 
             <ImageView
                 style="@style/LogIcon"
                 android:src="@mipmap/ic_lock" />
+
         </RelativeLayout>
 
         <RelativeLayout style="@style/LogLayout">
@@ -54,8 +58,9 @@
             <ImageView style="@style/LogButton" />
 
             <TextView
+                android:id="@+id/btn_login"
                 style="@style/LogText"
-                android:text="@string/start" />
+                android:text="@string/btn_login" />
         </RelativeLayout>
 
         <LinearLayout
@@ -73,6 +78,7 @@
                     style="@style/LogLink" />
 
                 <TextView
+                    android:id="@+id/btn_signup"
                     style="@style/LogTextLink"
                     android:text="@string/create" />
             </RelativeLayout>

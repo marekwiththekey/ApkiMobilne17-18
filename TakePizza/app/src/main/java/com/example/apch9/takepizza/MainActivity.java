@@ -18,6 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TabHost;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity
     protected ImageButton bSkip;
     protected ImageButton bSignUp;
     protected Button bSignIn;
+    protected TextView tvGreetings;
+    protected FirebaseAuth auth;
+    protected NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        auth = FirebaseAuth.getInstance();
+        /*navigationView = (NavigationView) findViewById(R.id.nav_view);
+        tvGreetings = navigationView.findViewById(R.id.greetUser);*/
+/*        NavigationView navigationVieww = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationVieww.inflateHeaderView(R.layout.nav_header_main);
+        TextView iv = (TextView)headerView.findViewById(R.id.greetUser);
+
+        if (auth.getCurrentUser() != null) {
+            iv.setText("Hello " + auth.getCurrentUser().getEmail());
+        }*/
     }
 
     @Override
@@ -101,6 +117,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_acc) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
+        }
+         else if (id == R.id.nav_logout) {
+            if (auth.getCurrentUser() != null) {
+                auth.signOut();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
