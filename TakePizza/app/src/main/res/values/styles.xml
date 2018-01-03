@@ -10,7 +10,7 @@
 
     <!--Login & Register Theme-->
     <style name="LogLayout">
-        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_gravity">center</item>
     </style>
@@ -23,12 +23,12 @@
     </style>
 
     <style name="LogEdit" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:layout_width">220dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_marginStart">60dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/font</item>
         <item name="android:backgroundTint">@color/clalpha</item>
@@ -68,7 +68,7 @@
 
     <style name="LogLink">
         <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_height">30dp</item>
         <item name="android:background">@color/clalpha</item>
     </style>
 
@@ -96,5 +96,9 @@
         <item name="android:paddingBottom">20dp</item>
         <item name="android:paddingEnd">30dp</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="Base.Widget.AppCompat.Light.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

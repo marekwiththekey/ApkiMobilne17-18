@@ -11,5 +11,4 @@
     <string name="pizzas">Pizzas</string>
     <string name="drinks">Drinks</string>
     <string name="others">Others</string>
-    <string name="short_password">Password too short: minimum length is 6 characters long.</string>
-</resources>
+    <string name="short_password">Password too short: minimum length is 6 characters long.</string>    <string name="title_activity_main">MainActivity</string>    <string name="navigation_drawer_open">Open navigation drawer</string>    <string name="navigation_drawer_close">Close navigation drawer</string>    <string name="action_settings">Settings</string></resources>

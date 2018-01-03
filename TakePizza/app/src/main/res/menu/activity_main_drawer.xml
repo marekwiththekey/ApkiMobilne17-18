@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@mipmap/ho_icon"
+            android:title="Start" />
+        <item
+            android:id="@+id/nav_menu"
+            android:icon="@mipmap/pizza_icon"
+            android:title="Menu" />
+        <item
+            android:id="@+id/nav_bask"
+            android:icon="@mipmap/ba_icon"
+            android:title="Basket" />
+    </group>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_acc"
+                android:icon="@mipmap/ac_icon"
+                android:title="Account" />
+        </menu>
+    </item>
+
+</menu>
