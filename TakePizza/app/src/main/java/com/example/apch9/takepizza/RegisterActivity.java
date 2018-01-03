@@ -73,13 +73,11 @@ public class RegisterActivity extends MainActivity {
         String confirm = etConfirmPassword.getText().toString().trim();
 
         if (password.length() < 6 || confirm.length() < 6) {
-//            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//            alertDialog.setTitle("Invalid password!");
-//            alertDialog.setMessage("Password and/or Confirm Password fields are invalid.\nValid password should be at least 6 characters long.");
-//            alertDialog.show();
-            Toast toast = Toast.makeText(getApplicationContext(),"Invalid password: minimum length is 6 characters long.",Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP|Gravity.LEFT, 100, 500);
+            Toast toast = Toast.makeText(getApplicationContext(),R.string.short_password,Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 300);
             toast.show();
+            etPassword.setError("Password too short");
+            etConfirmPassword.setError("Password too short");
         } else {
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirm)) {
