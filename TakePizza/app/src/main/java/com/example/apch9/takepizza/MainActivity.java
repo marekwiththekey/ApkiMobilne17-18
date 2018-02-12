@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         auth = FirebaseAuth.getInstance();
+
+
         /*navigationView = (NavigationView) findViewById(R.id.nav_view);
         tvGreetings = navigationView.findViewById(R.id.greetUser);*/
 /*        NavigationView navigationVieww = (NavigationView) findViewById(R.id.nav_view);
@@ -115,14 +117,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_bask) {
 
         } else if (id == R.id.nav_acc) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            //zmiana hasla itd
         }
          else if (id == R.id.nav_logout) {
             if (auth.getCurrentUser() != null) {
                 auth.signOut();
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                finish();
             }
         }
 
@@ -131,8 +131,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
-    public void onMain(View view) {
+    public void onBack(View view) {
         finish();
     }
 

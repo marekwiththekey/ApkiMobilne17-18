@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tlo"
-    android:onClick="onView"
     android:paddingLeft="40dp"
+    android:onClick="onView"
+    android:gravity="center"
     android:paddingRight="40dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,18 +82,17 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp">
+                android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/bBack"
-                    style="@style/LogLink"
-                    android:onClick="onMain" />
+                    android:onClick="onBack"
+                    style="@style/LogLink" />
 
                 <TextView
                     style="@style/LogTextLink"
-                    android:text="@string/back" />
+                    android:text="Go Back" />
             </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

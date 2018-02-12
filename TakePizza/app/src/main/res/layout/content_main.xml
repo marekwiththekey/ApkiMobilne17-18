@@ -8,93 +8,12 @@
     tools:context="com.example.apch9.takepizza.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:padding="10dp">
-
-            <Button
-                android:layout_width="match_parent"
-                android:text="Promocje"
-                android:layout_height="130dp"
-                android:background="@color/colorbg" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:padding="10dp">
-
-            <Button
-                android:layout_width="match_parent"
-                android:text="Pizza"
-                android:layout_height="130dp"
-                android:background="@color/button" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:padding="10dp">
-
-            <Button
-                android:layout_width="match_parent"
-                android:text="Napoje"
-                android:layout_height="130dp"
-                android:background="@color/clgrey" />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:padding="10dp">
-
-            <Button
-                android:layout_width="match_parent"
-                android:text="Dodatki"
-                android:layout_height="130dp"
-                android:background="@color/colorPrimary" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:padding="10dp">
-
-            <Button
-                android:layout_width="match_parent"
-                android:text="Dodatki"
-                android:layout_height="130dp"
-                android:background="@color/colorPrimary" />
-        </FrameLayout>
-
-    </LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:id="@+id/rec_main"
+        android:scrollbars="vertical"
+        />
 
 
 </android.support.constraint.ConstraintLayout>

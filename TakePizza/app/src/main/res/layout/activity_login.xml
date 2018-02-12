@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tlo"
     android:paddingLeft="40dp"
+    android:onClick="onView"
+    android:gravity="center"
     android:paddingRight="40dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:onClick="onView"
         android:orientation="vertical">
 
         <ImageView
@@ -23,14 +25,14 @@
 
         <RelativeLayout style="@style/LogLayout">
 
+            <ImageView style="@style/LogImage" />
+
             <EditText
                 android:id="@+id/loginEmail"
                 style="@style/LogEdit"
-                android:layout_alignParentBottom="true"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
-            <ImageView style="@style/LogImage" />
 
             <ImageView
                 style="@style/LogIcon"
@@ -74,13 +76,12 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/bSignUp"
+                    android:onClick="onBack"
                     style="@style/LogLink" />
 
                 <TextView
-                    android:id="@+id/btn_signup"
                     style="@style/LogTextLink"
-                    android:text="@string/create" />
+                    android:text="Go Back" />
             </RelativeLayout>
 
             <View
@@ -102,17 +103,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout style="@style/SkipLayout">
-
-        <ImageButton
-            android:id="@+id/bSkip"
-            style="@style/SkipButton"
-            android:onClick="onMain" />
-
-        <TextView
-            style="@style/SkipText"
-            android:text="Skip" />
-    </RelativeLayout>
-
 </RelativeLayout>

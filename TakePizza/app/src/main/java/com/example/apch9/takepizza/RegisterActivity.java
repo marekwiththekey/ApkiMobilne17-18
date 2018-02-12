@@ -21,14 +21,14 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by apch9 on 22.11.2017.
  */
 
-public class RegisterActivity extends Main1Activity {
+public class RegisterActivity extends StartActivity {
 
     private EditText etEmail;
     private EditText etPassword;
     private EditText etConfirmPassword;
     private TextView tvCreateAccount;
 
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private DatabaseReference dbrDatabaseReference;
 
     private ProgressDialog pdProgress;
@@ -38,12 +38,10 @@ public class RegisterActivity extends Main1Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         dbrDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         pdProgress = new ProgressDialog(this);
-
-        bBack = (ImageButton)findViewById(R.id.bBack);
 
         etEmail = (EditText)findViewById(R.id.etEmail);
         etPassword = (EditText)findViewById(R.id.etPassword);
@@ -57,9 +55,6 @@ public class RegisterActivity extends Main1Activity {
                 startRegister();
             }
         });
-
-
-
     }
 
     private void startRegister() {
@@ -77,11 +72,11 @@ public class RegisterActivity extends Main1Activity {
                 pdProgress.setMessage("Creating a new account ...");
                 pdProgress.show();
                 if (TextUtils.equals(password, confirm)) {
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                String user_id = mAuth.getCurrentUser().getUid();
+                                String user_id = auth.getCurrentUser().getUid();
 
                                 dbrDatabaseReference.child(user_id);
 

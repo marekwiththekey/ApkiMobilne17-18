@@ -16,12 +16,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends StartActivity {
 
     private EditText inputEmail, inputPassword;
-    private FirebaseAuth auth;
+    //private FirebaseAuth auth;
     //private ProgressBar progressBar;
-    private TextView btnSignup, btnLogin, btnReset;
+    private TextView btnLogin, btnReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +44,13 @@ public class LoginActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.loginEmail);
         inputPassword = (EditText) findViewById(R.id.loginPassword);
         //progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnSignup = (TextView) findViewById(R.id.btn_signup);
         btnLogin = (TextView) findViewById(R.id.btn_login);
         //btnReset = (Button) findViewById(R.id.btn_reset_password);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
-
-/*        btnReset.setOnClickListener(new View.OnClickListener() {
+        /*        btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
@@ -71,7 +63,11 @@ public class LoginActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
-                if (TextUtils.isEmpty(email)) {
+                if (!validateSignIn()) {
+                    return;
+                }
+
+                /*if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -79,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
 
                 //progressBar.setVisibility(View.VISIBLE);
 
@@ -94,11 +90,8 @@ public class LoginActivity extends AppCompatActivity {
                                 //progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
                                     // there was an error
-                                    if (password.length() < 6) {
-                                        inputPassword.setError(getString(R.string.minimum_password));
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                                    }
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
                                 } else {
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
@@ -109,4 +102,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    // SignIn Validation
+    private boolean validateSignIn() {
+        boolean valid = true;
+
+        String email = inputEmail.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            inputEmail.setError("Required.");
+            valid = false;
+        } else {
+            inputEmail.setError(null);
+        }
+
+        String password = inputPassword.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            inputPassword.setError("Required.");
+            valid = false;
+        } else {
+            inputPassword.setError(null);
+        }
+        return valid;
+    }
+
 }
