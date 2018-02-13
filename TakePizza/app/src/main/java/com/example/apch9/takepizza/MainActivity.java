@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +25,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -70,6 +76,24 @@ public class MainActivity extends AppCompatActivity
         if (auth.getCurrentUser() != null) {
             iv.setText("Hello " + auth.getCurrentUser().getEmail());
         }*/
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rec_main);
+        // w celach optymalizacji
+        recyclerView.setHasFixedSize(true);
+
+        // ustawiamy LayoutManagera
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // ustawiamy animatora, który odpowiada za animację dodania/usunięcia elementów listy
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        // tworzymy źródło danych - tablicę z artykułami
+        ArrayList<FoodItem> articles = new ArrayList<>();
+        for (int i = 0; i < 20; ++i)
+            articles.add(new FoodItem());
+
+        // tworzymy adapter oraz łączymy go z RecyclerView
+        recyclerView.setAdapter(new MyAdapter(articles, recyclerView));
     }
 
     @Override
