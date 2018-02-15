@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.apch9.takepizza.Interface.ItemClickListener;
 import com.example.apch9.takepizza.R;
 
 /**
@@ -15,6 +16,8 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder implements Vie
 
     public TextView restaurantName,restaurantCity,restaurantAddress;
     public ImageView restaurantImage;
+
+    private ItemClickListener itemClickListener;
 
 
     public RestaurantViewHolder(View itemView) {
@@ -30,7 +33,7 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder implements Vie
 
     @Override
     public void onClick(View view) {
-
+        itemClickListener.onClick(view, getAdapterPosition(),false);
     }
 
     public TextView getRestaurantName() {
@@ -47,5 +50,9 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder implements Vie
 
     public void setRestaurantImage(ImageView restaurantImage) {
         this.restaurantImage = restaurantImage;
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 }
