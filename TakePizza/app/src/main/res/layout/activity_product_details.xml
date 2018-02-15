@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.apch9.takepizza.ProductDetails">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:id="@+id/product_details_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+        <TextView
+            android:id="@+id/product_details_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+        <TextView
+            android:id="@+id/product_details_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/product_amount"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textAlignment="center"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/removeProduct"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Less"
+            android:onClick="subAmount"/>
+
+        <Button
+            android:id="@+id/addProduct"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="More"
+            android:onClick="addAmount"/>
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/addToOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to order"
+            android:onClick="addToOrder"/>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

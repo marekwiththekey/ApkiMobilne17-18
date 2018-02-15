@@ -1,5 +1,6 @@
 package com.example.apch9.takepizza;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,15 +54,17 @@ public class ProductList extends AppCompatActivity {
             @Override
             protected void populateViewHolder(ProductViewHolder viewHolder, Product model, int position) {
                 viewHolder.productName.setText(model.getName());
-                viewHolder.productPrice.setText(model.getPrice());
-                viewHolder.productDesc.setText(model.getDesc());
+                viewHolder.productPrice.setText(model.getPrice() + " PLN");
+                //viewHolder.productDesc.setText(model.getDesc());
                 System.out.println("RestaurantID = " + resId);
 
                 final Product local = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        System.out.println("Restaurant id = " + local.getRest_id());
+                        Intent productDetails = new Intent(ProductList.this, ProductDetails.class);
+                        productDetails.putExtra("productId",firebaseRecyclerAdapter.getRef(position).getKey());
+                        startActivity(productDetails);
                     }
                 });
             }

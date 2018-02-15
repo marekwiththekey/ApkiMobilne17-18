@@ -23,7 +23,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RestaurantList" />
-        <activity android:name=".ProductList"></activity>
+        <activity android:name=".ProductList" />
+        <activity android:name=".ProductDetails"></activity>
     </application>
 
 </manifest>
