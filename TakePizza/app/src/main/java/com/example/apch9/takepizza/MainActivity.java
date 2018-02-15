@@ -135,7 +135,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            Intent restaurantList = new Intent(MainActivity.this, RestaurantList.class);
+            startActivity(restaurantList);
         } else if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_bask) {
