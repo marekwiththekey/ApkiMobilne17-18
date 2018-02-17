@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "To the cart", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (getFragmentManager().getBackStackEntryCount() == 0) {
             this.finish();
         } else {
@@ -150,7 +149,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new RestaurantListFragment();
                 break;
             case R.id.nav_bask:
-                //fragment = new PaymentFragment();
+                //fragment = new CartListFragment();
                 break;
             case R.id.nav_acc:
                 //fragment = new ToolsFragment();

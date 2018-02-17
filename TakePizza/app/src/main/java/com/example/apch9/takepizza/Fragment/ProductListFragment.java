@@ -18,6 +18,7 @@ import com.example.apch9.takepizza.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 public class ProductListFragment extends Fragment {
 
@@ -69,6 +70,7 @@ public class ProductListFragment extends Fragment {
             protected void populateViewHolder(ProductViewHolder viewHolder, Product model, int position) {
                 viewHolder.productName.setText(model.getName());
                 viewHolder.productPrice.setText(model.getPrice() + " PLN");
+                Picasso.with(getActivity().getBaseContext()).load(model.getImage()).into(viewHolder.productImage);
                 //viewHolder.productDesc.setText(model.getDesc());
                 System.out.println("RestaurantID = " + resId);
 

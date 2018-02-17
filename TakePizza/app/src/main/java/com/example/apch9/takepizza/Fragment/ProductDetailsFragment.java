@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -29,6 +31,7 @@ public class ProductDetailsFragment extends Fragment {
     String productId = "";
 
     public TextView pName,desc,price;
+    public ImageView pImage;
     public ElegantNumberButton amount;
     private Integer productAmount = 1;
     private View view;
@@ -41,6 +44,7 @@ public class ProductDetailsFragment extends Fragment {
         pName = (TextView)view.findViewById(R.id.product_details_name);
         desc = (TextView)view.findViewById(R.id.product_details_desc);
         price = (TextView)view.findViewById(R.id.product_details_price);
+        pImage = (ImageView)view.findViewById(R.id.product_details_image);
         amount = (ElegantNumberButton)view.findViewById(R.id.product_amount);
         amount.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
@@ -76,6 +80,7 @@ public class ProductDetailsFragment extends Fragment {
                 product.setName(value.get("Name"));
                 product.setDesc(value.get("Desc"));
                 product.setImage(value.get("Image"));
+                Picasso.with(getActivity().getBaseContext()).load(product.getImage()).into(pImage);
                 product.setPrice(value.get("Price"));
                 product.setPromotion(value.get("Promotion"));
 

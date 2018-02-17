@@ -27,6 +27,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.firebaseui:firebase-ui-database:0.4.1'
     compile 'com.cepheuen.elegant-number-button:lib:1.0.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     //logowanie przez gmail
     implementation 'com.google.android.gms:play-services-auth:11.0.4'
     implementation 'com.google.firebase:firebase-database:11.0.4'

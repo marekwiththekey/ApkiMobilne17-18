@@ -86,7 +86,8 @@
                     android:paddingEnd="10dp"
                     android:paddingStart="20dp"
                     android:text="Prize"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
 
             </LinearLayout>
 
