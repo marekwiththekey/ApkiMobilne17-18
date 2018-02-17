@@ -1,67 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.apch9.takepizza.ProductDetails">
+    android:background="@color/fragment"
+    android:gravity="center"
+    android:id="@+id/fragment">
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/prize"
+        android:src="@mipmap/x"
+        android:elevation="20dp"
+        android:onClick="onClose"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-
-        <TextView
-            android:id="@+id/product_details_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-        <TextView
-            android:id="@+id/product_details_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-        <TextView
-            android:id="@+id/product_details_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/product_amount"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textAlignment="center"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/removeProduct"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Less"
-            android:onClick="subAmount"/>
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="#FEFEFE"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="15dp">
 
-        <Button
-            android:id="@+id/addProduct"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="More"
-            android:onClick="addAmount"/>
-    </LinearLayout>
 
-        <Button
-            android:id="@+id/addToOrder"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add to order"
-            android:onClick="addToOrder"/>
+            android:gravity="center"
+            android:orientation="vertical">
 
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+            <ImageView
+                android:id="@+id/product_details_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="20dp"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/product_details_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="30dp"
+                android:paddingTop="10dp"
+                android:text="Name"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="1dp"
+                android:background="@color/clgrey"
+                android:padding="1dp" />
+
+            <TextView
+                android:id="@+id/product_details_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                android:text="Desc"
+                android:textSize="12sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                    card_view:initialNumber="1"
+                    android:id="@+id/product_amount"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/prize"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/product_details_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="20dp"
+                    android:text="Prize"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+            <!--<Button-->
+            <!--android:id="@+id/removeProduct"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Less"-->
+            <!--android:onClick="subAmount"/>-->
+
+            <!--<Button-->
+            <!--android:id="@+id/addProduct"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="More"-->
+            <!--android:onClick="addAmount"/>-->
+            <!--</LinearLayout>-->
+
+            <Button
+                android:id="@+id/addToOrder"
+                android:layout_width="140dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/prize"
+                android:onClick="addToOrder"
+                android:text="Add to order"
+                android:textColor="@color/font"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
+

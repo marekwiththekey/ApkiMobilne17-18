@@ -8,9 +8,12 @@
     tools:context="com.example.apch9.takepizza.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/main_fragment"></FrameLayout>
+        android:id="@+id/recycler_cart"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

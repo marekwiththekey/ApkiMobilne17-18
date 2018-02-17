@@ -1,5 +1,6 @@
 package com.example.apch9.takepizza;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.example.apch9.takepizza.Fragment.RestaurantListFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     protected TextView tvGreetings;
     protected FirebaseAuth auth;
     protected NavigationView navigationView;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,34 +83,23 @@ public class MainActivity extends AppCompatActivity
             iv.setText("Hello " + auth.getCurrentUser().getEmail());
         }*/
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rec_main);
-        // w celach optymalizacji
-        recyclerView.setHasFixedSize(true);
-
-        // ustawiamy LayoutManagera
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // ustawiamy animatora, który odpowiada za animację dodania/usunięcia elementów listy
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        // tworzymy źródło danych - tablicę z artykułami
-        ArrayList<FoodItem> articles = new ArrayList<>();
-        for (int i = 0; i < 20; ++i)
-            articles.add(new FoodItem());
-
-        // tworzymy adapter oraz łączymy go z RecyclerView
-        recyclerView.setAdapter(new MyAdapter(articles, recyclerView));
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,32 +127,54 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            Intent restaurantList = new Intent(MainActivity.this, RestaurantList.class);
-            startActivity(restaurantList);
-        } else if (id == R.id.nav_menu) {
+        dispalySelectedScreen(id);
 
-        } else if (id == R.id.nav_bask) {
-
-        } else if (id == R.id.nav_acc) {
-            //zmiana hasla itd
-        }
-         else if (id == R.id.nav_logout) {
-            if (auth.getCurrentUser() != null) {
-                auth.signOut();
-                finish();
-            }
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    private void dispalySelectedScreen(int id) {
+
+        android.support.v4.app.Fragment fragment = null;
+
+        switch (id) {
+            case R.id.nav_logout:
+                if (auth.getCurrentUser() != null) {
+                    auth.signOut();
+                    finish();
+                }
+                break;
+            case R.id.nav_menu:
+                fragment = new RestaurantListFragment();
+                break;
+            case R.id.nav_bask:
+                //fragment = new PaymentFragment();
+                break;
+            case R.id.nav_acc:
+                //fragment = new ToolsFragment();
+                break;
+            case R.id.nav_home:
+                //fragment = new LoginFragment();
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.main_fragment, fragment);
+            ft.commit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
+
     public void onBack(View view) {
         finish();
+    }
+    public void onClose(View view) {
+        getFragmentManager().popBackStack();
     }
 
     public void onView(View view) {
@@ -169,6 +184,7 @@ public class MainActivity extends AppCompatActivity
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
 
     @Override
     public void onRestart() {

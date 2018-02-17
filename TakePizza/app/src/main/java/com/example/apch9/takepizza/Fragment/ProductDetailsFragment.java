@@ -1,14 +1,19 @@
-package com.example.apch9.takepizza;
+package com.example.apch9.takepizza.Fragment;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.apch9.takepizza.Model.Product;
-import com.google.firebase.database.ChildEventListener;
+import com.example.apch9.takepizza.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,29 +22,36 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class ProductDetails extends AppCompatActivity {
+public class ProductDetailsFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference dbRef;
     String productId = "";
 
-    public TextView pName,desc,price,amount;
-    public Button addButton, subButton;
+    public TextView pName,desc,price;
+    public ElegantNumberButton amount;
     private Integer productAmount = 1;
+    private View view;
 
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.activity_product_details, container, false);
 
-        pName = (TextView)findViewById(R.id.product_details_name);
-        desc = (TextView)findViewById(R.id.product_details_desc);
-        price = (TextView)findViewById(R.id.product_details_price);
-        amount = (TextView)findViewById(R.id.product_amount);
+        pName = (TextView)view.findViewById(R.id.product_details_name);
+        desc = (TextView)view.findViewById(R.id.product_details_desc);
+        price = (TextView)view.findViewById(R.id.product_details_price);
+        amount = (ElegantNumberButton)view.findViewById(R.id.product_amount);
+        amount.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+// zmiana widoku na textview ilosc*cena*promocja
+            }
+        });
 
-        if(getIntent() != null) {
-            productId = getIntent().getStringExtra("productId");
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            productId = bundle.getString("productId");
         }
 
         database = FirebaseDatabase.getInstance();
@@ -48,15 +60,7 @@ public class ProductDetails extends AppCompatActivity {
         if(!productId.isEmpty() && productId != null){
             getProductDetails();
         }
-
-    }
-
-    public Integer getProductAmount() {
-        return productAmount;
-    }
-
-    public void setProductAmmunt(Integer productAmount) {
-        this.productAmount = productAmount;
+        return view;
     }
 
     private void getProductDetails() {
@@ -90,19 +94,8 @@ public class ProductDetails extends AppCompatActivity {
 
     }
 
-    public void subAmount(View view) {
-        if(productAmount > 0) {
-            productAmount -= 1;
-            amount.setText(productAmount.toString());
-        }
-    }
-
-    public void addAmount(View view) {
-        productAmount += 1;
-        amount.setText(productAmount.toString());
-    }
-
     public void addToOrder(View view) {
-        Toast.makeText(ProductDetails.this, "Added selected food to the Order", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ProductDetailsFragment.this, "Added selected food to the Order", Toast.LENGTH_SHORT).show();
+        //finish();
     }
 }

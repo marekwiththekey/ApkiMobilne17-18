@@ -26,7 +26,7 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder implements Vie
         restaurantName = (TextView)itemView.findViewById(R.id.restaurant_name);
         restaurantCity = (TextView)itemView.findViewById(R.id.restaurant_city);
         restaurantAddress = (TextView)itemView.findViewById(R.id.restaurant_address);
-        restaurantImage = (ImageView)itemView.findViewById(R.id.restaurant_image);
+        //restaurantImage = (ImageView)itemView.findViewById(R.id.restaurant_image);
 
         itemView.setOnClickListener(this);
     }
