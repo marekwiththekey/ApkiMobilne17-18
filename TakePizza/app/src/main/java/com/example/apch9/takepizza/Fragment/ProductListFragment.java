@@ -68,8 +68,9 @@ public class ProductListFragment extends Fragment {
                 ProductViewHolder.class, dbRef.orderByChild("Rest_id").equalTo(resId)) {
             @Override
             protected void populateViewHolder(ProductViewHolder viewHolder, Product model, int position) {
+                Double price = Double.parseDouble(model.getPrice()) * Double.parseDouble(model.getPromotion());
                 viewHolder.productName.setText(model.getName());
-                viewHolder.productPrice.setText(model.getPrice() + " PLN");
+                viewHolder.productPrice.setText(String.format(price.toString(), 2f) + " PLN");
                 Picasso.with(getActivity().getBaseContext()).load(model.getImage()).into(viewHolder.productImage);
                 //viewHolder.productDesc.setText(model.getDesc());
                 System.out.println("RestaurantID = " + resId);

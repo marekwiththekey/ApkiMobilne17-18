@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.apch9.takepizza.Interface.ItemClickListener;
+import com.example.apch9.takepizza.Model.CartItem;
 import com.example.apch9.takepizza.Model.Restaurant;
 import com.example.apch9.takepizza.R;
+import com.example.apch9.takepizza.ViewHolder.CartViewHolder;
 import com.example.apch9.takepizza.ViewHolder.RestaurantViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,57 +28,41 @@ public class CartListFragment extends android.support.v4.app.Fragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
-    FirebaseDatabase database;
-    DatabaseReference dbRef;
-    //FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder> firebaseRecyclerAdapter;
+    FirebaseRecyclerAdapter<CartItem, CartViewHolder> firebaseRecyclerAdapter;
     android.support.v4.app.Fragment fragment;
     private View view;
+    private String userId;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_cart_list, container, false);
 
-/*
-        database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference("Restaurant");
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_restaurant);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_cart);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-*/
-        //getCartList();
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        getCartList();
 
         return view;
     }
 
     private void getCartList() {
-        /*firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder>(Restaurant.class, R.layout.cart_item,
-                RestaurantViewHolder.class, dbRef) {
+
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("CartItem");
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<CartItem, CartViewHolder>(CartItem.class, R.layout.cart_item,
+                CartViewHolder.class, dbRef) {
             @Override
-            protected void populateViewHolder(RestaurantViewHolder viewHolder, Restaurant model, int position) {
-                viewHolder.restaurantName.setText(model.getName());
-                viewHolder.restaurantCity.setText(model.getCity());
-                viewHolder.restaurantAddress.setText(model.getAddress());
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("restaurantId", firebaseRecyclerAdapter.getRef(position).getKey());
-                        fragment = new ProductListFragment();
-                        fragment.setArguments(bundle);
-                        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.product_list_fragment, fragment).addToBackStack(null).commit();
+            protected void populateViewHolder(CartViewHolder viewHolder, CartItem model, int position) {
+                viewHolder.itemName.setText(model.getName());
+                viewHolder.itemPrice.setText(model.getPrice());
 
-                    }
-                });
-
-                final Restaurant local = model;
+                final CartItem local = model;
 
             }
         };
 
-        recyclerView.setAdapter(firebaseRecyclerAdapter);*/
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 }

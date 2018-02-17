@@ -27,6 +27,8 @@ import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.example.apch9.takepizza.Fragment.CartListFragment;
+import com.example.apch9.takepizza.Fragment.ProductDetailsFragment;
 import com.example.apch9.takepizza.Fragment.RestaurantListFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -57,8 +59,12 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "To the cart", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                android.support.v4.app.Fragment fragment = new CartListFragment();
+                if(fragment != null){
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.main_fragment, fragment);
+                    ft.commit();
+                }
             }
         });
 
@@ -97,6 +103,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+
     }
 
 
@@ -149,7 +156,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new RestaurantListFragment();
                 break;
             case R.id.nav_bask:
-                //fragment = new CartListFragment();
+                fragment = new CartListFragment();
                 break;
             case R.id.nav_acc:
                 //fragment = new ToolsFragment();
@@ -190,4 +197,5 @@ public class MainActivity extends AppCompatActivity
         super.onRestart();
         recreate();
     }
+
 }

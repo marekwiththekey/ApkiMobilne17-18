@@ -8,13 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.apch9.takepizza.MainActivity;
+import com.example.apch9.takepizza.Model.CartItem;
 import com.example.apch9.takepizza.Model.Product;
 import com.example.apch9.takepizza.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class ProductDetailsFragment extends Fragment {
@@ -33,14 +38,19 @@ public class ProductDetailsFragment extends Fragment {
     public TextView pName,desc,price;
     public ImageView pImage;
     public ElegantNumberButton amount;
+    public Button addToOrder;
     private Integer productAmount = 1;
     private View view;
+    private Double constPrice;
+    private String promotionString;
+    private Integer elementsCount = 0;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_product_details, container, false);
 
+        getElementsCount();
         pName = (TextView)view.findViewById(R.id.product_details_name);
         desc = (TextView)view.findViewById(R.id.product_details_desc);
         price = (TextView)view.findViewById(R.id.product_details_price);
@@ -49,7 +59,21 @@ public class ProductDetailsFragment extends Fragment {
         amount.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Double newPrice = constPrice * Double.parseDouble(amount.getNumber());
+                String sPrice = newPrice.toString();
+                int dotIndex = sPrice.indexOf(".");
+                sPrice = sPrice.substring(0, dotIndex+2);
+                price.setText(sPrice + " PLN");
 // zmiana widoku na textview ilosc*cena*promocja
+            }
+        });
+        addToOrder = (Button)view.findViewById(R.id.addToOrder);
+        addToOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addItemToCart();
+                String msg = amount.getNumber() + "x" + pName.getText() + " to Cart";
+                Toast.makeText(getContext(), "Added " + msg, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -64,7 +88,41 @@ public class ProductDetailsFragment extends Fragment {
         if(!productId.isEmpty() && productId != null){
             getProductDetails();
         }
+
         return view;
+    }
+
+    private void addItemToCart() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String newItem = "";
+
+        elementsCount+=1;
+        if(elementsCount < 10) newItem = "0" + elementsCount.toString();
+        else newItem = elementsCount.toString();
+
+        CartItem newCartItem = new CartItem(amount.getNumber(), pName.getText().toString(), price.getText().toString(), promotionString );
+        System.out.println("liczba ele : " + elementsCount);
+        dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("CartItem").child(newItem);
+        dbRef.setValue(newCartItem);
+        DatabaseReference newdbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Elements");
+        newdbRef.setValue(elementsCount.toString());
+    }
+
+    private void getElementsCount() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Elements");
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                elementsCount = Integer.parseInt(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void getProductDetails() {
@@ -89,6 +147,9 @@ public class ProductDetailsFragment extends Fragment {
                 Double promotion = Double.parseDouble(product.getPromotion());
                 Double dprice = Double.parseDouble(product.getPrice()) * promotion;
                 price.setText(dprice.toString() + " PLN");
+
+                constPrice = Double.parseDouble(product.getPrice()) * Double.parseDouble(product.getPromotion());
+                promotionString = product.getPromotion();
             }
 
             @Override
@@ -99,8 +160,8 @@ public class ProductDetailsFragment extends Fragment {
 
     }
 
-    public void addToOrder(View view) {
-        //Toast.makeText(ProductDetailsFragment.this, "Added selected food to the Order", Toast.LENGTH_SHORT).show();
+/*    public void addToOrder(View view) {
+        System.out.println("ilosc produktow: " + amount.getNumber());
         //finish();
-    }
+    }*/
 }

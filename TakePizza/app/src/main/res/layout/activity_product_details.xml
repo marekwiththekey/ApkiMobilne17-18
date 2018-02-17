@@ -117,10 +117,9 @@
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/prize"
-                android:onClick="addToOrder"
-                android:text="Add to order"
+                android:text="Add to cart"
                 android:textColor="@color/font"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
