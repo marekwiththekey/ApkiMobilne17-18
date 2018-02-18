@@ -8,8 +8,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
 import com.example.apch9.takepizza.Model.Order;
 import com.example.apch9.takepizza.R;
 import com.example.apch9.takepizza.ViewHolder.HistoryViewHolder;
@@ -30,7 +28,6 @@ public class HistoryListFragment extends android.support.v4.app.Fragment {
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
     private FirebaseRecyclerAdapter<Order, HistoryViewHolder> firebaseRecyclerAdapter;
-    private ProductDetailsFragment fragment;
     private View view;
 
     @Nullable

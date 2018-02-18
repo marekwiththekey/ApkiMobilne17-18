@@ -1,7 +1,5 @@
 package com.example.apch9.takepizza.Fragment;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.apch9.takepizza.Interface.ItemClickListener;
 import com.example.apch9.takepizza.Model.Restaurant;
 import com.example.apch9.takepizza.R;
@@ -21,13 +18,13 @@ import com.squareup.picasso.Picasso;
 
 public class RestaurantListFragment extends android.support.v4.app.Fragment {
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
 
-    FirebaseDatabase database;
-    DatabaseReference dbRef;
-    FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder> firebaseRecyclerAdapter;
-    android.support.v4.app.Fragment fragment;
+    private FirebaseDatabase database;
+    private DatabaseReference dbRef;
+    private FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder> firebaseRecyclerAdapter;
+    private android.support.v4.app.Fragment fragment;
     private View view;
 
     @Nullable
