@@ -10,12 +10,13 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/tlo2">
 
         <ImageView
             android:id="@+id/splashScreenIv"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_width="320dp"
+            android:layout_height="140dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="129dp"

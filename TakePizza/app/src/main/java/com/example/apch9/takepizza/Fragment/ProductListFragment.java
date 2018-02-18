@@ -10,6 +10,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.apch9.takepizza.Interface.ItemClickListener;
 import com.example.apch9.takepizza.Model.Product;
@@ -25,6 +26,7 @@ public class ProductListFragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
+    public android.support.v7.widget.AppCompatButton close;
     FirebaseDatabase database;
     DatabaseReference dbRef;
     FirebaseRecyclerAdapter<Product, ProductViewHolder> firebaseRecyclerAdapter;
@@ -44,6 +46,14 @@ public class ProductListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+
+        close = (android.support.v7.widget.AppCompatButton) view.findViewById(R.id.ret);
+        close.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
