@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
     private String userId;
     private Double totalPrice = 0.0;
     public TextView toPay;
+    public Button pay, clear;
 
     @Nullable
     @Override
@@ -51,15 +53,31 @@ public class CartListFragment extends android.support.v4.app.Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        getCartList(getContext());
+        getCartList();
         getTotalPrice(view);
+        pay = (Button)view.findViewById(R.id.proceedToPayment);
+        clear = (Button)view.findViewById(R.id.clearCart);
+
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearCartList();
+            }
+        });
 
 
 
         return view;
     }
 
-    private void getCartList(final Context context) {
+    private void getCartList() {
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("CartItem");
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<CartItem, CartViewHolder>(CartItem.class, R.layout.cart_item,
@@ -77,6 +95,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
+
     private void getTotalPrice(View view) {
         toPay = (TextView)view.findViewById(R.id.toPay);
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Worth");
@@ -95,5 +114,13 @@ public class CartListFragment extends android.support.v4.app.Fragment {
 
             }
         });
+    }
+
+    private void clearCartList() {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId);
+        dbRef.setValue(null);
+        Toast.makeText(getContext(), "Item(s) have been removed", Toast.LENGTH_LONG).show();
+        getCartList();
+        toPay.setText("Total price");
     }
 }
