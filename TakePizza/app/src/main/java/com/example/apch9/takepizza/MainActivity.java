@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 
 import com.example.apch9.takepizza.Fragment.CartListFragment;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected FirebaseAuth auth;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,16 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
+
+        webView = (WebView) findViewById(R.id.web_view);
+        ImageButton imgButton = (ImageButton) findViewById(R.id.image_button);
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.loadUrl("https://www.biesiadowo.pl");
+            }
+        });
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
