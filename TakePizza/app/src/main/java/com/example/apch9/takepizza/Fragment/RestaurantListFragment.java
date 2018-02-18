@@ -57,7 +57,7 @@ public class RestaurantListFragment extends android.support.v4.app.Fragment {
                 viewHolder.restaurantName.setText(model.getName());
                 viewHolder.restaurantCity.setText(model.getCity());
                 viewHolder.restaurantAddress.setText(model.getAddress());
-                //Picasso.with(getActivity().getBaseContext()).load(model.getImage()).into(viewHolder.restaurantImage);
+                Picasso.with(getActivity().getBaseContext()).load(model.getImage()).into(viewHolder.restaurantImage);
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {

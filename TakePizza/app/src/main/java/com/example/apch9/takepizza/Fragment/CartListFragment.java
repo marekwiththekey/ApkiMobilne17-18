@@ -54,8 +54,6 @@ public class CartListFragment extends android.support.v4.app.Fragment {
         getCartList(getContext());
         getTotalPrice(view);
 
-
-
         return view;
     }
 

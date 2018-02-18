@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class ProductDetailsFragment extends Fragment {
     DatabaseReference dbRef;
     String productId = "";
 
+    public ImageButton close;
     public TextView pName,desc,price;
     public ImageView pImage;
     public ElegantNumberButton amount;
@@ -66,6 +68,14 @@ public class ProductDetailsFragment extends Fragment {
                 int dotIndex = sPrice.indexOf(".");
                 sPrice = sPrice.substring(0, dotIndex+2);
                 price.setText(sPrice + " PLN");
+            }
+        });
+
+        close = (ImageButton) view.findViewById(R.id.close);
+        close.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().popBackStack();
             }
         });
 
