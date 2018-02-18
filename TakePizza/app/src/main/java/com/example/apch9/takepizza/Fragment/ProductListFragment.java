@@ -1,6 +1,5 @@
 package com.example.apch9.takepizza.Fragment;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
 import com.example.apch9.takepizza.Interface.ItemClickListener;
 import com.example.apch9.takepizza.Model.Product;
 import com.example.apch9.takepizza.R;

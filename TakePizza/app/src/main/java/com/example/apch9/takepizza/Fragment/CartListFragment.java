@@ -51,15 +51,14 @@ import java.text.SimpleDateFormat;
 
 public class CartListFragment extends android.support.v4.app.Fragment {
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-
-    FirebaseRecyclerAdapter<CartItem, CartViewHolder> firebaseRecyclerAdapter;
-    android.support.v4.app.Fragment fragment;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private FirebaseRecyclerAdapter<CartItem, CartViewHolder> firebaseRecyclerAdapter;
     private View view;
     private String userId, deliveryAddress;
     private Double totalPrice = 0.0;
     private Integer elements = 0;
+
     public TextView toPay;
     public Button pay, clear;
 
@@ -105,7 +104,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deliveryAddress = input.getText().toString();
-                        newPayment(totalPrice,deliveryAddress);
+                        newPayment(totalPrice);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -129,7 +128,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
-    private void newPayment(Double totalPrice, String deliveryAddress) {
+    private void newPayment(Double totalPrice) {
 
         PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(totalPrice)),"PLN","FeedApp Payment",PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(getContext(), PaymentActivity.class);

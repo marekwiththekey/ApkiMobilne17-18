@@ -1,10 +1,8 @@
 package com.example.apch9.takepizza.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-import com.example.apch9.takepizza.MainActivity;
 import com.example.apch9.takepizza.Model.CartItem;
 import com.example.apch9.takepizza.Model.Product;
 import com.example.apch9.takepizza.R;
@@ -41,7 +37,6 @@ public class ProductDetailsFragment extends Fragment {
     public ImageView pImage;
     public ElegantNumberButton amount;
     public Button addToOrder;
-    private Integer productAmount = 1;
     private View view;
     private Double constPrice;
     private String promotionString;
@@ -84,7 +79,7 @@ public class ProductDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 addItemToCart();
-                String msg = amount.getNumber() + "x" + pName.getText() + " to Cart";
+                String msg = amount.getNumber() + "x " + pName.getText() + " to Cart";
                 Toast.makeText(getContext(), "Added " + msg, Toast.LENGTH_LONG).show();
             }
         });

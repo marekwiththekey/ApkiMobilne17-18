@@ -27,10 +27,7 @@ public class RegisterActivity extends StartActivity {
     private EditText etPassword;
     private EditText etConfirmPassword;
     private TextView tvCreateAccount;
-
-    //private FirebaseAuth mAuth;
     private DatabaseReference dbrDatabaseReference;
-
     private ProgressDialog pdProgress;
 
     @Override

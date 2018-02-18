@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.ImageButton;
-
 import com.example.apch9.takepizza.Fragment.CartListFragment;
 import com.example.apch9.takepizza.Fragment.HistoryListFragment;
 import com.example.apch9.takepizza.Fragment.RestaurantListFragment;
@@ -60,17 +59,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         auth = FirebaseAuth.getInstance();
 
-
-        /*navigationView = (NavigationView) findViewById(R.id.nav_view);
-        tvGreetings = navigationView.findViewById(R.id.greetUser);*/
-/*        NavigationView navigationVieww = (NavigationView) findViewById(R.id.nav_view);
-        View headerView = navigationVieww.inflateHeaderView(R.layout.nav_header_main);
-        TextView iv = (TextView)headerView.findViewById(R.id.greetUser);
-
-        if (auth.getCurrentUser() != null) {
-            iv.setText("Hello " + auth.getCurrentUser().getEmail());
-        }*/
-
     }
 
     @Override
@@ -92,21 +80,6 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
