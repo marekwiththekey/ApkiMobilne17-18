@@ -1,7 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/login" />
-    <stroke
-        android:width="10px"
-        android:color="@color/loginframe" />
+    <solid android:color="@color/font" />
     <corners android:radius="2000px" />
 </shape>
