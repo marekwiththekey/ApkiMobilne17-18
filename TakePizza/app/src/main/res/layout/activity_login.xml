@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tlo"
-    android:paddingLeft="40dp"
-    android:onClick="onView"
     android:gravity="center"
+    android:onClick="onView"
+    android:paddingLeft="40dp"
     android:paddingRight="40dp">
 
     <LinearLayout
@@ -45,30 +44,15 @@
             <ImageView style="@style/LogImage" />
 
             <EditText
+                android:id="@+id/loginPassword"
                 style="@style/LogEdit"
                 android:hint="@string/password"
-                android:inputType="textPassword"
-                android:id="@+id/loginPassword" />
+                android:inputType="textPassword" />
 
             <ImageView
                 style="@style/LogIcon"
                 android:src="@mipmap/ic_lock" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
-
-            <CheckBox
-                android:id="@+id/remember"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:textStyle="bold"
-                android:textColor="@color/font"
-                android:layout_marginStart="20dp"
-                android:text="      Remember me"/>
         </RelativeLayout>
 
 
@@ -86,38 +70,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <RelativeLayout
+            <CheckBox
+                android:id="@+id/remember"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:checked="true"
+                android:text="      Remember me"
+                android:textColor="@color/font"
+                android:textStyle="bold" />
 
-                <ImageButton
-                    android:onClick="onBack"
-                    style="@style/LogLink" />
+            <Button
+                android:layout_marginStart="30dp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:background="@color/clalpha"
+                android:textColor="@color/font"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:text="Go Back"
+                android:onClick="onBack" />
 
-                <TextView
-                    style="@style/LogTextLink"
-                    android:text="Go Back" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="40dp"
-                android:layout_height="match_parent"></View>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:id="@+id/bForgo"
-                    style="@style/LogLink" />
-
-                <TextView
-                    style="@style/LogTextLink"
-                    android:text="@string/forgot" />
-            </RelativeLayout>
 
         </LinearLayout>
     </LinearLayout>
