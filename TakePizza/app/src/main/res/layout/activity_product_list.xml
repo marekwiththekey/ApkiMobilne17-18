@@ -8,7 +8,8 @@
     tools:context="com.example.apch9.takepizza.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:background="#FEFEFE"
-    android:elevation="10dp">
+    android:elevation="10dp"
+    android:layout_gravity="center">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

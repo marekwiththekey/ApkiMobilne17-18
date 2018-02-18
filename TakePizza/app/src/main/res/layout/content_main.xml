@@ -11,6 +11,14 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/button">
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/main_fragment"></FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
