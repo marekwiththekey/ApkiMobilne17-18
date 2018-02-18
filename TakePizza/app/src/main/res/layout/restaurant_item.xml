@@ -50,8 +50,8 @@
         </LinearLayout>-->
     <ImageView
         android:id="@+id/restaurant_image"
-        android:layout_width="210dp"
-        android:layout_height="100dp"
+        android:layout_width="190dp"
+        android:layout_height="120dp"
         android:scaleType="centerCrop"
         card_view:cardBackgroundColor="@color/back"
         card_view:cardCornerRadius="10dp"
@@ -67,15 +67,15 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginLeft="200dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="190dp"
         android:layout_marginRight="10dp"
         android:background="#FEFEFE"
         android:defaultFocusHighlightEnabled="false"
         android:elevation="0dp" />
 
     <LinearLayout
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="190dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -84,10 +84,11 @@
         android:gravity="center">
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
             android:id="@+id/restaurant_name"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:padding="1dp"
             android:text="Nazwa"
             android:textAlignment="center"
@@ -99,6 +100,7 @@
             android:layout_height="20dp"
             android:padding="1dp"
             android:text="Nazwa"
+            android:gravity="center"
             android:textAlignment="center"
             android:textSize="15sp" />
 
@@ -108,6 +110,7 @@
             android:layout_height="20dp"
             android:padding="1dp"
             android:text="Nazwa"
+            android:gravity="center"
             android:textAlignment="center"
             android:textSize="13sp" />
     </LinearLayout>

@@ -181,7 +181,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
         dbRef.setValue(null);
         if(withMsg)Toast.makeText(getContext(), "Item(s) have been removed", Toast.LENGTH_LONG).show();
         getCartList();
-        toPay.setText("Total price");
+        toPay.setText("To pay:  0.0 PLN");
     }
 
     public void getOrderElementsCount(){
