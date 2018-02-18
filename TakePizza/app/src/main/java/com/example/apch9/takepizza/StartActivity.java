@@ -3,6 +3,7 @@ package com.example.apch9.takepizza;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -18,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Created by apch9 on 12.02.2018.
  */
 
-public class StartActivity extends MainActivity {
+public class StartActivity extends AppCompatActivity {
 
     protected FirebaseAuth auth;
 

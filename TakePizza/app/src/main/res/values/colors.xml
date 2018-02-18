@@ -6,6 +6,7 @@
 
     <color name="colorbg">#fcfcfc</color>
     <color name="clwhite">#8affffff</color>
+    <color name="nav">#d7ffffff</color>
     <color name="clalpha">#00ffffff</color>
     <color name="font">#fdfdfd</color>
     <color name="button">#da0000</color>
