@@ -37,15 +37,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    protected Button bLog;
-    protected ImageButton bBack;
-    protected ImageButton bSkip;
-    protected ImageButton bSignUp;
-    protected Button bSignIn;
-    protected TextView tvGreetings;
     protected FirebaseAuth auth;
-    protected NavigationView navigationView;
-    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,9 +174,6 @@ public class MainActivity extends AppCompatActivity
     public void onBack(View view) {
         finish();
     }
-    public void onClose(View view) {
-        getFragmentManager().popBackStack();
-    }
 
     public void onView(View view) {
         View onview = this.getCurrentFocus();
@@ -193,7 +182,6 @@ public class MainActivity extends AppCompatActivity
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
 
     @Override
     public void onRestart() {
