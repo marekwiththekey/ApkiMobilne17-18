@@ -11,24 +11,29 @@
         <item
             android:id="@+id/nav_menu"
             android:icon="@mipmap/pizza_icon"
-            android:title="Menu" />
+            android:title="Restaurants" />
         <item
             android:id="@+id/nav_bask"
             android:icon="@mipmap/ba_icon"
-            android:title="Basket" />
+            android:title="Cart" />
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@mipmap/ba_icon"
+            android:title="Order History" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@mipmap/ac_icon"
+            android:title="Logout" />
     </group>
 
-    <item android:title="Account">
+<!--    <item android:title="Account">
         <menu>
             <item
                 android:id="@+id/nav_acc"
                 android:icon="@mipmap/ac_icon"
                 android:title="Account" />
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@mipmap/ac_icon"
-                android:title="Logout" />
+
         </menu>
-    </item>
+    </item>-->
 
 </menu>

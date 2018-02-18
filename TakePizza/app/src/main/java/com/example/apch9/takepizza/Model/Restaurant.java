@@ -6,15 +6,16 @@ package com.example.apch9.takepizza.Model;
 
 public class Restaurant {
 
-    private String Name, City, Address;
+    private String Name, City, Address, Image;
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, String city, String address) {
+    public Restaurant(String name, String city, String address, String image) {
         Name = name;
         City = city;
         Address = address;
+        Image = image;
     }
 
     public String getName() {
@@ -39,5 +40,13 @@ public class Restaurant {
 
     public void setAddress(String address) {
         Address = address;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
     }
 }

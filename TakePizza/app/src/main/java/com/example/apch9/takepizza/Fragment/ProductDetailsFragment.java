@@ -44,6 +44,7 @@ public class ProductDetailsFragment extends Fragment {
     private Double constPrice;
     private String promotionString;
     private Integer elementsCount = 0;
+    private Double currentWorth = 0.0;
 
     @Nullable
     @Override
@@ -51,6 +52,7 @@ public class ProductDetailsFragment extends Fragment {
         view = inflater.inflate(R.layout.activity_product_details, container, false);
 
         getElementsCount();
+        getCurrentWorth();
         pName = (TextView)view.findViewById(R.id.product_details_name);
         desc = (TextView)view.findViewById(R.id.product_details_desc);
         price = (TextView)view.findViewById(R.id.product_details_price);
@@ -64,9 +66,9 @@ public class ProductDetailsFragment extends Fragment {
                 int dotIndex = sPrice.indexOf(".");
                 sPrice = sPrice.substring(0, dotIndex+2);
                 price.setText(sPrice + " PLN");
-// zmiana widoku na textview ilosc*cena*promocja
             }
         });
+
         addToOrder = (Button)view.findViewById(R.id.addToOrder);
         addToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,11 +103,18 @@ public class ProductDetailsFragment extends Fragment {
         else newItem = elementsCount.toString();
 
         CartItem newCartItem = new CartItem(amount.getNumber(), pName.getText().toString(), price.getText().toString(), promotionString );
-        System.out.println("liczba ele : " + elementsCount);
+
         dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("CartItem").child(newItem);
         dbRef.setValue(newCartItem);
         DatabaseReference newdbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Elements");
         newdbRef.setValue(elementsCount.toString());
+
+        String sPrice = newCartItem.getPrice();
+        sPrice = sPrice.substring(0, sPrice.length()-4);
+        currentWorth += Double.parseDouble(sPrice);
+
+        newdbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Worth");
+        newdbRef.setValue(currentWorth.toString());
     }
 
     private void getElementsCount() {
@@ -115,7 +124,25 @@ public class ProductDetailsFragment extends Fragment {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                elementsCount = Integer.parseInt(dataSnapshot.getValue().toString());
+                if (dataSnapshot.getValue() != null ) elementsCount = Integer.parseInt(dataSnapshot.getValue().toString());
+                else elementsCount = 0;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void getCurrentWorth(){
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Worth");
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null ) currentWorth = Double.parseDouble(dataSnapshot.getValue().toString());
+                else currentWorth = 0.0;
             }
 
             @Override
@@ -159,9 +186,4 @@ public class ProductDetailsFragment extends Fragment {
         });
 
     }
-
-/*    public void addToOrder(View view) {
-        System.out.println("ilosc produktow: " + amount.getNumber());
-        //finish();
-    }*/
 }

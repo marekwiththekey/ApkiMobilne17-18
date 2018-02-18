@@ -1,5 +1,6 @@
 package com.example.apch9.takepizza.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apch9.takepizza.Interface.ItemClickListener;
 import com.example.apch9.takepizza.Model.CartItem;
@@ -16,8 +19,11 @@ import com.example.apch9.takepizza.ViewHolder.CartViewHolder;
 import com.example.apch9.takepizza.ViewHolder.RestaurantViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by apch9 on 17.02.2018.
@@ -32,6 +38,8 @@ public class CartListFragment extends android.support.v4.app.Fragment {
     android.support.v4.app.Fragment fragment;
     private View view;
     private String userId;
+    private Double totalPrice = 0.0;
+    public TextView toPay;
 
     @Nullable
     @Override
@@ -43,26 +51,49 @@ public class CartListFragment extends android.support.v4.app.Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        getCartList();
+        getCartList(getContext());
+        getTotalPrice(view);
+
+
 
         return view;
     }
 
-    private void getCartList() {
+    private void getCartList(final Context context) {
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("CartItem");
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<CartItem, CartViewHolder>(CartItem.class, R.layout.cart_item,
                 CartViewHolder.class, dbRef) {
             @Override
             protected void populateViewHolder(CartViewHolder viewHolder, CartItem model, int position) {
-                viewHolder.itemName.setText(model.getName());
-                viewHolder.itemPrice.setText(model.getPrice());
-
-                final CartItem local = model;
+                if(model != null) {
+                    viewHolder.itemName.setText(model.getName());
+                    viewHolder.itemPrice.setText(model.getPrice());
+                    final CartItem local = model;
+                }
 
             }
         };
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+    private void getTotalPrice(View view) {
+        toPay = (TextView)view.findViewById(R.id.toPay);
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Worth");
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null) {
+                    String sPrice = dataSnapshot.getValue(String.class);
+                    totalPrice = Double.parseDouble(sPrice);
+                    toPay.setText("To pay: " + totalPrice.toString() + " PLN");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

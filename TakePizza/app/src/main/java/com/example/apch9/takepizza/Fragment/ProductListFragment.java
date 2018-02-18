@@ -70,10 +70,9 @@ public class ProductListFragment extends Fragment {
             protected void populateViewHolder(ProductViewHolder viewHolder, Product model, int position) {
                 Double price = Double.parseDouble(model.getPrice()) * Double.parseDouble(model.getPromotion());
                 viewHolder.productName.setText(model.getName());
-                viewHolder.productPrice.setText(String.format(price.toString(), 2f) + " PLN");
+                viewHolder.productPrice.setText(price.toString() + " PLN");
                 Picasso.with(getActivity().getBaseContext()).load(model.getImage()).into(viewHolder.productImage);
-                //viewHolder.productDesc.setText(model.getDesc());
-                System.out.println("RestaurantID = " + resId);
+
 
                 final Product local = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
@@ -88,9 +87,14 @@ public class ProductListFragment extends Fragment {
                             android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
                         }
-                        //Intent productDetails = new Intent(ProductList.this, ProductDetails.class);
-                        //productDetails.putExtra("productId",firebaseRecyclerAdapter.getRef(position).getKey());
-                        //startActivity(productDetails);
+                        else {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("productId", firebaseRecyclerAdapter.getRef(position).getKey());
+                            fragment = new ProductDetailsFragment();
+                            fragment.setArguments(bundle);
+                            android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
+                        }
                     }
                 });
             }

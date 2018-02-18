@@ -12,12 +12,13 @@ import com.example.apch9.takepizza.R;
 
 public class CartViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView itemName, itemPrice;
+    public TextView itemName, itemPrice, totalPrice;
 
     public CartViewHolder(View itemView) {
         super(itemView);
 
         itemName = (TextView)itemView.findViewById(R.id.cart_item_name);
         itemPrice = (TextView)itemView.findViewById(R.id.cart_price);
+        totalPrice = (TextView)itemView.findViewById(R.id.toPay);
     }
 }

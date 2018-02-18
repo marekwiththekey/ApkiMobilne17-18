@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TakePizza.iml" filepath="$PROJECT_DIR$/TakePizza.iml" />
-      <module fileurl="file://D:\studia\semestr5\mobilne\v3\ApkiMobilne17-18\TakePizza\TakePizza.iml" filepath="D:\studia\semestr5\mobilne\v3\ApkiMobilne17-18\TakePizza\TakePizza.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\studia\semestr5\mobilne\v3\ApkiMobilne17-18\TakePizza\app\app.iml" filepath="D:\studia\semestr5\mobilne\v3\ApkiMobilne17-18\TakePizza\app\app.iml" />
     </modules>
   </component>
 </project>
