@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected FirebaseAuth auth;
-    WebView webView;
+
     ImageButton fab;
 
     @Override
@@ -48,16 +48,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-
-        webView = (WebView) findViewById(R.id.web_view);
-        ImageButton imgButton = (ImageButton) findViewById(R.id.image_button);
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.loadUrl("https://www.biesiadowo.pl");
-            }
-        });
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
