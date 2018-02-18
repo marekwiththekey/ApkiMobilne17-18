@@ -65,7 +65,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
 
     static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(PaypalConfig.CLIENT_ID);
     private static final int PAYPAL_REQUEST_CODE=9999;
-    private static final SimpleDateFormat orderDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm");
+    private static final SimpleDateFormat orderDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Nullable
     @Override
@@ -98,6 +98,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
 
                 final EditText input = new EditText(getContext());
                 input.setInputType(InputType.TYPE_CLASS_TEXT );
+                input.setHint("Street name & number, City");
                 builder.setView(input);
 
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -147,8 +148,15 @@ public class CartListFragment extends android.support.v4.app.Fragment {
                 if(model != null) {
                     viewHolder.itemName.setText(model.getName());
                     viewHolder.itemPrice.setText(model.getPrice());
+                    clear.setEnabled(true);
+                    pay.setEnabled(true);
                     final CartItem local = model;
                 }
+                else {
+                    clear.setEnabled(false);
+                    pay.setEnabled(false);
+                }
+
 
             }
         };
@@ -230,9 +238,10 @@ public class CartListFragment extends android.support.v4.app.Fragment {
 
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String orderDate = orderDateFormat.format(timestamp).toString();
-                    database = FirebaseDatabase.getInstance().getReference().child("Order").child(userId).child(newOrderId);
+                    database = FirebaseDatabase.getInstance().getReference().child("Order").child(userId).child("OrderItem").child(newOrderId);
                     database.child("Worth").setValue(totalPrice.toString());
                     database.child("Date").setValue(orderDate);
+                    database.child("Address").setValue(deliveryAddress);
                     Toast.makeText(getContext(), "Payment have been sucessful", Toast.LENGTH_LONG).show();
                     clearCartList(false);
                 }
