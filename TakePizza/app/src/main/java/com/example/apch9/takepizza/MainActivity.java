@@ -17,6 +17,7 @@ import android.webkit.WebView;
 import android.widget.ImageButton;
 
 import com.example.apch9.takepizza.Fragment.CartListFragment;
+import com.example.apch9.takepizza.Fragment.HistoryListFragment;
 import com.example.apch9.takepizza.Fragment.RestaurantListFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -148,11 +149,8 @@ public class MainActivity extends AppCompatActivity
                 fragment = new CartListFragment();
                 break;
             case R.id.nav_history:
-                //fragment = new OrderHistoryFragment();
+                fragment = new HistoryListFragment();
                 break;
-/*            case R.id.nav_acc:
-                //fragment = new ToolsFragment();
-                break;*/
             case R.id.nav_home:
                 break;
         }

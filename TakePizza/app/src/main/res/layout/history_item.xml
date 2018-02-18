@@ -17,13 +17,22 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/history_data"
+            android:id="@+id/history_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:gravity="center_horizontal|start|center_vertical"
             android:text="Time order"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/history_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_horizontal|start|center_vertical"
+            android:textStyle="bold"
+            android:text="Address"/>
 
         <TextView
             android:id="@+id/history_price"
