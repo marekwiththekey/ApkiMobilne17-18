@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity
 
     protected FirebaseAuth auth;
     WebView webView;
+    ImageButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ImageButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 android.support.v4.app.Fragment fragment = new CartListFragment();
                 if(fragment != null){
+                    fab.setVisibility(View.INVISIBLE);
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.main_fragment, fragment);
                     ft.commit();
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().remove(f).commit();
         }
         android.support.v4.app.Fragment fragment = null;
-
+        fab.setVisibility(View.VISIBLE);
         switch (id) {
             case R.id.nav_logout:
                 if (auth.getCurrentUser() != null) {
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new RestaurantListFragment();
                 break;
             case R.id.nav_bask:
+                fab.setVisibility(View.INVISIBLE);
                 fragment = new CartListFragment();
                 break;
             case R.id.nav_history:
