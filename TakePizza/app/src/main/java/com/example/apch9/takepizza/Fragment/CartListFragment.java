@@ -154,7 +154,7 @@ public class CartListFragment extends android.support.v4.app.Fragment {
             @Override
             protected void populateViewHolder(CartViewHolder viewHolder, CartItem model, int position) {
                 if(model != null) {
-                    viewHolder.itemName.setText(model.getName());
+                    viewHolder.itemName.setText(model.getName() + " x" +  model.getAmount());
                     viewHolder.itemPrice.setText(model.getPrice());
                     clear.setEnabled(true);
                     pay.setEnabled(true);

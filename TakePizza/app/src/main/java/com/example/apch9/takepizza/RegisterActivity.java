@@ -3,6 +3,7 @@ package com.example.apch9.takepizza;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -69,9 +70,17 @@ public class RegisterActivity extends StartActivity {
     }
 
     private void startRegister() {
+        if(auth.getCurrentUser() != null) auth.signOut();
+
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         String confirm = etConfirmPassword.getText().toString().trim();
+
+        SharedPreferences settings = getSharedPreferences("userLoginData", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("Email", email);
+        editor.putString("Password", password);
+        editor.commit();
 
         if (password.length() < 6 || confirm.length() < 6) {
 //            AlertDialog alertDialog = new AlertDialog.Builder(this).create();//            alertDialog.setTitle("Invalid password!");//            alertDialog.setMessage("Password and/or Confirm Password fields are invalid.\nValid password should be at least 6 characters long.");//            alertDialog.show();//            Toast toast = Toast.makeText(getApplicationContext(),"Invalid password: minimum length is 6 characters long.",Toast.LENGTH_LONG);//            toast.setGravity(Gravity.TOP|Gravity.LEFT, 100, 500);//            toast.show();            etPassword.setError("Password too short");
