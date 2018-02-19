@@ -3,23 +3,36 @@ package com.example.apch9.takepizza;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.apch9.takepizza.Fragment.CartListFragment;
 import com.example.apch9.takepizza.Fragment.HistoryListFragment;
+import com.example.apch9.takepizza.Fragment.ProductListFragment;
+import com.example.apch9.takepizza.Fragment.RecommendedFragment;
 import com.example.apch9.takepizza.Fragment.RestaurantListFragment;
+import com.example.apch9.takepizza.Interface.ItemClickListener;
+import com.example.apch9.takepizza.Model.Restaurant;
+import com.example.apch9.takepizza.ViewHolder.RestaurantViewHolder;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +40,12 @@ public class MainActivity extends AppCompatActivity
     protected FirebaseAuth auth;
     protected FirebaseUser currentUser;
     NavigationView navigationView;
+    private FirebaseDatabase database;
+    private DatabaseReference dbRef;
+    private FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder> firebaseRecyclerAdapter;
+    private android.support.v4.app.Fragment fragment;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
 
     ImageButton fab;
 
@@ -65,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         currentUser = auth.getCurrentUser();
         updateUI(currentUser);
     }
+
 
 
     private void updateUI(FirebaseUser user) {
@@ -120,6 +140,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 if (auth.getCurrentUser() != null) {
                     auth.signOut();
+                    Toast.makeText(this, "You have been logged out", Toast.LENGTH_LONG).show();
                     fab.setVisibility(View.INVISIBLE);
                 }
                 break;
@@ -127,6 +148,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new RestaurantListFragment();
                 break;
             case R.id.nav_bask:
+                fab.setVisibility(View.INVISIBLE);
                 fragment = new CartListFragment();
                 break;
             case R.id.nav_history:
