@@ -11,12 +11,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     private android.support.v4.app.Fragment fragment;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
+    private Button moreRes;
 
     ImageButton fab;
 
@@ -84,9 +87,51 @@ public class MainActivity extends AppCompatActivity
 
         currentUser = auth.getCurrentUser();
         updateUI(currentUser);
+
+        database = FirebaseDatabase.getInstance();
+        dbRef = database.getReference("Restaurant");
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_recommended);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        moreRes = (Button)findViewById(R.id.moreRestaurants);
+        moreRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment = new RestaurantListFragment();
+            }
+        });
+
+        getRestaurantList();
     }
 
+    private void getRestaurantList() {
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder>(Restaurant.class, R.layout.restaurant_item,
+                RestaurantViewHolder.class, dbRef.startAt("01").endAt("02")) {
+            @Override
+            protected void populateViewHolder(RestaurantViewHolder viewHolder, Restaurant model, int position) {
+                viewHolder.restaurantName.setText(model.getName());
+                viewHolder.restaurantCity.setText(model.getCity());
+                viewHolder.restaurantAddress.setText(model.getAddress());
+                Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.restaurantImage);
 
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("restaurantId", firebaseRecyclerAdapter.getRef(position).getKey());
+
+                    }
+                });
+
+                final Restaurant local = model;
+
+            }
+        };
+
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
 
     private void updateUI(FirebaseUser user) {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
