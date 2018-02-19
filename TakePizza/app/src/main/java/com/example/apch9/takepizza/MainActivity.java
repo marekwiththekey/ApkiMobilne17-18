@@ -177,16 +177,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRestart() {
         super.onRestart();
-        recreate();
+
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
+
         auth = FirebaseAuth.getInstance();
 
         currentUser = auth.getCurrentUser();
         updateUI(currentUser);
-
+        super.onResume();
     }
 }
