@@ -21,7 +21,7 @@ public class SplashscreenActivity extends AppCompatActivity {
 
 
 
-        final Intent mainActivityIntent = new Intent(this,StartActivity.class);
+        final Intent mainActivityIntent = new Intent(this,MainActivity.class);
 
         Thread timer = new Thread(){
             public void run(){

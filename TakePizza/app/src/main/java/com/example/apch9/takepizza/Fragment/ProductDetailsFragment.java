@@ -1,5 +1,6 @@
 package com.example.apch9.takepizza.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,10 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.apch9.takepizza.LoginActivity;
+import com.example.apch9.takepizza.MainActivity;
 import com.example.apch9.takepizza.Model.CartItem;
 import com.example.apch9.takepizza.Model.Product;
 import com.example.apch9.takepizza.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,14 +46,15 @@ public class ProductDetailsFragment extends Fragment {
     private String promotionString;
     private Integer elementsCount = 0;
     private Double currentWorth = 0.0;
+    protected FirebaseAuth auth;
+    protected FirebaseUser currentUser;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_product_details, container, false);
 
-        getElementsCount();
-        getCurrentWorth();
+
         pName = (TextView)view.findViewById(R.id.product_details_name);
         desc = (TextView)view.findViewById(R.id.product_details_desc);
         price = (TextView)view.findViewById(R.id.product_details_price);
@@ -74,13 +79,24 @@ public class ProductDetailsFragment extends Fragment {
             }
         });
 
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+
         addToOrder = (Button)view.findViewById(R.id.addToOrder);
         addToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addItemToCart();
-                String msg = amount.getNumber() + "x " + pName.getText() + " to Cart";
-                Toast.makeText(getContext(), "Added " + msg, Toast.LENGTH_LONG).show();
+                if (currentUser == null) {
+                    Intent intent = new Intent(getActivity(),LoginActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    addItemToCart();
+                    String msg = amount.getNumber() + "x " + pName.getText() + " to Cart";
+                    Toast.makeText(getContext(), "Added " + msg, Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -96,6 +112,8 @@ public class ProductDetailsFragment extends Fragment {
             getProductDetails();
         }
 
+        getElementsCount();
+        getCurrentWorth();
         return view;
     }
 
@@ -123,38 +141,44 @@ public class ProductDetailsFragment extends Fragment {
     }
 
     private void getElementsCount() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Elements");
+        if (currentUser != null) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Elements");
 
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null ) elementsCount = Integer.parseInt(dataSnapshot.getValue().toString());
-                else elementsCount = 0;
-            }
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null)
+                        elementsCount = Integer.parseInt(dataSnapshot.getValue().toString());
+                    else elementsCount = 0;
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
     private void getCurrentWorth(){
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Worth");
+        if (currentUser != null) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(userId).child("Worth");
 
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null ) currentWorth = Double.parseDouble(dataSnapshot.getValue().toString());
-                else currentWorth = 0.0;
-            }
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null)
+                        currentWorth = Double.parseDouble(dataSnapshot.getValue().toString());
+                    else currentWorth = 0.0;
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void getProductDetails() {

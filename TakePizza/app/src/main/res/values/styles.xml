@@ -30,7 +30,7 @@
         <item name="android:layout_marginStart">60dp</item>
         <item name="android:layout_marginEnd">30dp</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/font</item>
+        <item name="android:textColor">@color/font2</item>
         <item name="android:backgroundTint">@color/clalpha</item>
         <item name="android:padding">10dp</item>
     </style>

@@ -1,13 +1,14 @@
 package com.example.apch9.takepizza;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,19 @@ public class RegisterActivity extends StartActivity {
     private DatabaseReference dbrDatabaseReference;
     private ProgressDialog pdProgress;
 
+    public void onView(View view) {
+        View onview = this.getCurrentFocus();
+        if (onview != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public void onBack(View view) {
+        finish();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +54,15 @@ public class RegisterActivity extends StartActivity {
 
         pdProgress = new ProgressDialog(this);
 
-        etEmail = (EditText)findViewById(R.id.etEmail);
-        etPassword = (EditText)findViewById(R.id.etPassword);
-        etConfirmPassword = (EditText)findViewById(R.id.etConfirmPassword);
-        tvCreateAccount = (TextView)findViewById(R.id.tvCreateAccount);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
+        tvCreateAccount = (TextView) findViewById(R.id.tvCreateAccount);
 
 
-        tvCreateAccount.setOnClickListener(new View.OnClickListener(){
+        tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 startRegister();
             }
         });

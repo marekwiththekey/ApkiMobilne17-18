@@ -1,100 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tlo"
-    android:paddingLeft="40dp"
-    android:onClick="onView"
+    android:background="@drawable/tlo6"
     android:gravity="center"
+    android:onClick="onView"
+    android:paddingLeft="40dp"
     android:paddingRight="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="20dp"
+            card_view:cardBackgroundColor="#6d000000"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:src="@drawable/logo"
+                    android:textSize="40dp" />
+
+
+                <RelativeLayout style="@style/LogLayout">
+
+                    <ImageView style="@style/LogImage" />
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        style="@style/LogEdit"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress" />
+
+                    <ImageView
+                        style="@style/LogIcon"
+                        android:src="@mipmap/ic_mail" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/LogLayout">
+
+                    <ImageView style="@style/LogImage" />
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        style="@style/LogEdit"
+                        android:hint="@string/password"
+                        android:inputType="textPassword" />
+
+                    <ImageView
+                        style="@style/LogIcon"
+                        android:src="@mipmap/ic_lock" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/LogLayout">
+
+                    <ImageView style="@style/LogImage" />
+
+                    <EditText
+                        android:id="@+id/etConfirmPassword"
+                        style="@style/LogEdit"
+                        android:hint="@string/confirm"
+                        android:inputType="textPassword" />
+
+                    <ImageView
+                        style="@style/LogIcon"
+                        android:src="@mipmap/ic_lock" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/LogLayout">
+
+                    <ImageView style="@style/LogButton" />
+
+                    <TextView
+                        android:id="@+id/tvCreateAccount"
+                        style="@style/LogText"
+                        android:text="@string/create" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:gravity="center_horizontal">
 
-
-        <RelativeLayout style="@style/LogLayout">
-
-            <ImageView style="@style/LogImage" />
-
-            <EditText
-                android:id="@+id/etEmail"
-                style="@style/LogEdit"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress" />
-
-            <ImageView
-                style="@style/LogIcon"
-                android:src="@mipmap/ic_mail" />
-        </RelativeLayout>
-
-        <RelativeLayout style="@style/LogLayout">
-
-            <ImageView style="@style/LogImage" />
-
-            <EditText
-                android:id="@+id/etPassword"
-                style="@style/LogEdit"
-                android:hint="@string/password"
-                android:inputType="textPassword" />
-
-            <ImageView
-                style="@style/LogIcon"
-                android:src="@mipmap/ic_lock" />
-        </RelativeLayout>
-
-        <RelativeLayout style="@style/LogLayout">
-
-            <ImageView style="@style/LogImage" />
-
-            <EditText
-                android:id="@+id/etConfirmPassword"
-                style="@style/LogEdit"
-                android:hint="@string/confirm"
-                android:inputType="textPassword" />
-
-            <ImageView
-                style="@style/LogIcon"
-                android:src="@mipmap/ic_lock" />
-        </RelativeLayout>
-
-        <RelativeLayout style="@style/LogLayout">
-
-            <ImageView style="@style/LogButton" />
-
-            <TextView
-                android:id="@+id/tvCreateAccount"
-                style="@style/LogText"
-                android:text="@string/create" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:onClick="onBack"
-                    style="@style/LogLink" />
-
-                <TextView
-                    style="@style/LogTextLink"
-                    android:text="Go Back" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
+        <Button
+            android:onClick="onBack"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
+            android:background="@drawable/clear"
+            android:elevation="10dp"
+            android:text="Back"
+            android:textColor="@color/font"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

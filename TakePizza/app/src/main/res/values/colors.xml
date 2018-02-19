@@ -6,9 +6,12 @@
 
     <color name="colorbg">#fcfcfc</color>
     <color name="clwhite">#8affffff</color>
+    <color name="clblack">#8a595959</color>
+
     <color name="nav">#d7ffffff</color>
     <color name="clalpha">#00ffffff</color>
     <color name="font">#fdfdfd</color>
+    <color name="font2">#636363</color>
     <color name="button">#da0000</color>
     <color name="clgrey">#e2e2e2</color>
 

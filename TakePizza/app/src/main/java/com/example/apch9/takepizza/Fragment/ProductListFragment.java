@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
 import com.example.apch9.takepizza.Interface.ItemClickListener;
 import com.example.apch9.takepizza.Model.Product;
 import com.example.apch9.takepizza.R;
@@ -58,7 +59,7 @@ public class ProductListFragment extends Fragment {
             restaurantId = bundle.getString("restaurantId");
         }
 
-        if(!restaurantId.isEmpty() && restaurantId != null){
+        if (!restaurantId.isEmpty() && restaurantId != null) {
             getProductList(restaurantId);
         }
         return view;
@@ -86,23 +87,14 @@ public class ProductListFragment extends Fragment {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("productId", firebaseRecyclerAdapter.getRef(position).getKey());
+                        fragment = new ProductDetailsFragment();
+                        fragment.setArguments(bundle);
+                        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
 
-                        if (getFragmentManager().getBackStackEntryCount() == 1) {
-                            Bundle bundle = new Bundle();
-                            bundle.putString("productId", firebaseRecyclerAdapter.getRef(position).getKey());
-                            fragment = new ProductDetailsFragment();
-                            fragment.setArguments(bundle);
-                            android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                            fragmentManager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
-                        }
-                        else {
-                            Bundle bundle = new Bundle();
-                            bundle.putString("productId", firebaseRecyclerAdapter.getRef(position).getKey());
-                            fragment = new ProductDetailsFragment();
-                            fragment.setArguments(bundle);
-                            android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                            fragmentManager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
-                        }
+
                     }
                 });
             }

@@ -2,9 +2,8 @@ package com.example.apch9.takepizza;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,18 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebView;
 import android.widget.ImageButton;
+
 import com.example.apch9.takepizza.Fragment.CartListFragment;
 import com.example.apch9.takepizza.Fragment.HistoryListFragment;
 import com.example.apch9.takepizza.Fragment.RestaurantListFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected FirebaseAuth auth;
+    protected FirebaseUser currentUser;
+    NavigationView navigationView;
 
     ImageButton fab;
 
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 android.support.v4.app.Fragment fragment = new CartListFragment();
-                if(fragment != null){
+                if (fragment != null) {
                     fab.setVisibility(View.INVISIBLE);
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.main_fragment, fragment);
@@ -55,11 +58,24 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         auth = FirebaseAuth.getInstance();
 
+        currentUser = auth.getCurrentUser();
+        updateUI(currentUser);
     }
+
+
+    private void updateUI(FirebaseUser user) {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        if (user == null) {
+            nav_Menu.findItem(R.id.nav_logout).setVisible(false);
+        }
+        else nav_Menu.findItem(R.id.nav_logout).setVisible(true);
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -94,7 +110,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void dispalySelectedScreen(int id) {
-        for(android.support.v4.app.Fragment f:getSupportFragmentManager().getFragments()){
+        for (android.support.v4.app.Fragment f : getSupportFragmentManager().getFragments()) {
 
             getSupportFragmentManager().beginTransaction().remove(f).commit();
         }
@@ -104,14 +120,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 if (auth.getCurrentUser() != null) {
                     auth.signOut();
-                    finish();
+                    fab.setVisibility(View.INVISIBLE);
                 }
                 break;
             case R.id.nav_menu:
                 fragment = new RestaurantListFragment();
                 break;
             case R.id.nav_bask:
-                fab.setVisibility(View.INVISIBLE);
                 fragment = new CartListFragment();
                 break;
             case R.id.nav_history:
@@ -138,7 +153,7 @@ public class MainActivity extends AppCompatActivity
     public void onView(View view) {
         View onview = this.getCurrentFocus();
         if (onview != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }

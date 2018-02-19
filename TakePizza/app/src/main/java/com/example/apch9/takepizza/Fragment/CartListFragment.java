@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.apch9.takepizza.Common.PaypalConfig;
 import com.example.apch9.takepizza.Interface.ItemClickListener;
+import com.example.apch9.takepizza.LoginActivity;
 import com.example.apch9.takepizza.Model.CartItem;
 import com.example.apch9.takepizza.Model.Restaurant;
 import com.example.apch9.takepizza.R;
@@ -27,6 +28,7 @@ import com.example.apch9.takepizza.ViewHolder.CartViewHolder;
 import com.example.apch9.takepizza.ViewHolder.RestaurantViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,6 +63,8 @@ public class CartListFragment extends android.support.v4.app.Fragment {
 
     public TextView toPay;
     public Button pay, clear;
+    protected FirebaseAuth auth;
+    protected FirebaseUser currentUser;
 
     static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(PaypalConfig.CLIENT_ID);
     private static final int PAYPAL_REQUEST_CODE=9999;
@@ -75,55 +79,60 @@ public class CartListFragment extends android.support.v4.app.Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        getCartList();
-        getTotalPrice(view);
-        getOrderElementsCount();
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        pay = (Button)view.findViewById(R.id.proceedToPayment);
-        clear = (Button)view.findViewById(R.id.clearCart);
+            getCartList();
+            getTotalPrice(view);
+            getOrderElementsCount();
 
-        Intent intent = new Intent(getContext(),PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        getActivity().startService(intent);
+            pay = (Button)view.findViewById(R.id.proceedToPayment);
+            clear = (Button)view.findViewById(R.id.clearCart);
 
+            Intent intent = new Intent(getContext(),PayPalService.class);
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+            getActivity().startService(intent);
 
-        pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Enter delivery address");
+            pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Enter delivery address");
 
-                final EditText input = new EditText(getContext());
-                input.setInputType(InputType.TYPE_CLASS_TEXT );
-                input.setHint("Street name & number, City");
-                builder.setView(input);
+                    final EditText input = new EditText(getContext());
+                    input.setInputType(InputType.TYPE_CLASS_TEXT );
+                    input.setHint("Street name & number, City");
+                    builder.setView(input);
 
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deliveryAddress = input.getText().toString();
-                        newPayment(totalPrice);
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deliveryAddress = input.getText().toString();
+                            newPayment(totalPrice);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
 
-            }
-        });
+                }
+            });
 
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearCartList(true);
-            }
-        });
+            clear.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clearCartList(true);
+                }
+            });
+        }
+
 
         return view;
     }

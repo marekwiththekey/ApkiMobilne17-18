@@ -13,6 +13,7 @@ import com.example.apch9.takepizza.R;
 import com.example.apch9.takepizza.ViewHolder.HistoryViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,27 +30,34 @@ public class HistoryListFragment extends android.support.v4.app.Fragment {
     private DatabaseReference dbRef;
     private FirebaseRecyclerAdapter<Order, HistoryViewHolder> firebaseRecyclerAdapter;
     private View view;
+    protected FirebaseAuth auth;
+    protected FirebaseUser currentUser;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_history_list, container, false);
 
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference("Order").child(userId).child("OrderItem");
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_history);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
-        getHistoryList();
-        return view;
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            database = FirebaseDatabase.getInstance();
+            dbRef = database.getReference("Order").child(userId).child("OrderItem");
 
+            getHistoryList();
+        }
+
+        return view;
     }
 
     private void getHistoryList() {
+
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Order, HistoryViewHolder>(Order.class, R.layout.history_item,
                 HistoryViewHolder.class, dbRef) {
             @Override
@@ -64,4 +72,5 @@ public class HistoryListFragment extends android.support.v4.app.Fragment {
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
+
 }

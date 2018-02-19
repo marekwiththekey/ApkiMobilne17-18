@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tlo"
-    android:gravity="center"
+    android:background="@drawable/tlo6"
+    android:gravity="center_horizontal"
     android:onClick="onView"
     android:paddingLeft="40dp"
     android:paddingRight="40dp">
@@ -11,91 +11,130 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:gravity="center">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:src="@drawable/logo"
-            android:textSize="40dp" />
-
-
-        <RelativeLayout style="@style/LogLayout">
-
-            <ImageView style="@style/LogImage" />
-
-            <EditText
-                android:id="@+id/loginEmail"
-                style="@style/LogEdit"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress" />
-
-
-            <ImageView
-                style="@style/LogIcon"
-                android:src="@mipmap/ic_mail" />
-        </RelativeLayout>
-
-        <RelativeLayout style="@style/LogLayout">
-
-            <ImageView style="@style/LogImage" />
-
-            <EditText
-                android:id="@+id/loginPassword"
-                style="@style/LogEdit"
-                android:hint="@string/password"
-                android:inputType="textPassword" />
-
-            <ImageView
-                style="@style/LogIcon"
-                android:src="@mipmap/ic_lock" />
-
-        </RelativeLayout>
-
-
-        <RelativeLayout style="@style/LogLayout">
-
-            <ImageView style="@style/LogButton" />
-
-            <TextView
-                android:id="@+id/btn_login"
-                style="@style/LogText"
-                android:text="@string/btn_login" />
-        </RelativeLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_margin="10dp"
+            android:padding="20dp"
+            card_view:cardBackgroundColor="#6d000000"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="5dp">
 
-            <CheckBox
-                android:id="@+id/remember"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:checked="true"
-                android:text="      Remember me"
-                android:textColor="@color/font"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <Button
-                android:layout_marginStart="30dp"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:background="@color/clalpha"
-                android:textColor="@color/font"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:text="Go Back"
-                android:onClick="onBack" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:src="@drawable/logo"
+                    android:textSize="40dp" />
 
 
-        </LinearLayout>
+                <RelativeLayout style="@style/LogLayout">
+
+                    <ImageView style="@style/LogImage" />
+
+                    <EditText
+                        android:id="@+id/loginEmail"
+                        style="@style/LogEdit"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress" />
+
+
+                    <ImageView
+                        style="@style/LogIcon"
+                        android:src="@mipmap/ic_mail" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/LogLayout">
+
+                    <ImageView style="@style/LogImage" />
+
+                    <EditText
+                        android:id="@+id/loginPassword"
+                        style="@style/LogEdit"
+                        android:hint="@string/password"
+                        android:inputType="textPassword" />
+
+                    <ImageView
+                        style="@style/LogIcon"
+                        android:src="@mipmap/ic_lock" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout style="@style/LogLayout">
+
+                    <ImageView style="@style/LogButton" />
+
+                    <TextView
+                        android:id="@+id/btn_login"
+                        style="@style/LogText"
+                        android:text="@string/btn_login" />
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/remember"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:checked="true"
+                        android:text="     Remember me"
+                        android:textColor="@color/font"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="30dp"
+                        android:background="@color/clalpha"
+                        android:onClick="onReg"
+                        android:text="Create Account"
+                        android:textAllCaps="false"
+                        android:textColor="@color/font"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:layout_gravity="bottom"
+            android:onClick="onBack"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/clear"
+            android:text="Back"
+            android:elevation="10dp"
+            android:textColor="@color/font"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
 </RelativeLayout>
