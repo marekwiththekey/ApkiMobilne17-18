@@ -24,6 +24,11 @@
             android:id="@+id/nav_logout"
             android:icon="@mipmap/ac_icon"
             android:title="Logout" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@mipmap/ac_icon"
+            android:visible="false"
+            android:title="Login" />
     </group>
 
 <!--    <item android:title="Account">

@@ -1,6 +1,7 @@
 package com.example.apch9.takepizza;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -92,8 +93,14 @@ public class MainActivity extends AppCompatActivity
         Menu nav_Menu = navigationView.getMenu();
         if (user == null) {
             nav_Menu.findItem(R.id.nav_logout).setVisible(false);
+            nav_Menu.findItem(R.id.nav_login).setVisible(true);
         }
-        else nav_Menu.findItem(R.id.nav_logout).setVisible(true);
+        else
+        {
+            nav_Menu.findItem(R.id.nav_logout).setVisible(true);
+            nav_Menu.findItem(R.id.nav_login).setVisible(false);
+        }
+
     }
 
 
@@ -136,13 +143,20 @@ public class MainActivity extends AppCompatActivity
         }
         android.support.v4.app.Fragment fragment = null;
         fab.setVisibility(View.VISIBLE);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         switch (id) {
             case R.id.nav_logout:
                 if (auth.getCurrentUser() != null) {
                     auth.signOut();
                     Toast.makeText(this, "You have been logged out", Toast.LENGTH_LONG).show();
-                    fab.setVisibility(View.INVISIBLE);
-                }
+                    Menu nav_Menu = navigationView.getMenu();
+                    nav_Menu.findItem(R.id.nav_logout).setVisible(false);
+                    nav_Menu.findItem(R.id.nav_login).setVisible(true);                }
+                break;
+            case R.id.nav_login:
+                Intent intent = new Intent(this,LoginActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_menu:
                 fragment = new RestaurantListFragment();
@@ -186,4 +200,13 @@ public class MainActivity extends AppCompatActivity
         recreate();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        auth = FirebaseAuth.getInstance();
+
+        currentUser = auth.getCurrentUser();
+        updateUI(currentUser);
+
+    }
 }
