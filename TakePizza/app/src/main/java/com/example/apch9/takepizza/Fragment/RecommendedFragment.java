@@ -61,9 +61,10 @@ public class RecommendedFragment extends android.support.v4.app.Fragment {
 
     private void getRestaurantList() {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder>(Restaurant.class, R.layout.restaurant_item,
-                RestaurantViewHolder.class, dbRef.startAt("01").endAt("02")) {
+                RestaurantViewHolder.class, dbRef.orderByKey().startAt("01").endAt("02")) {
             @Override
             protected void populateViewHolder(RestaurantViewHolder viewHolder, Restaurant model, int position) {
+                System.out.println("recomended model: " + model);
                 viewHolder.restaurantName.setText(model.getName());
                 viewHolder.restaurantCity.setText(model.getCity());
                 viewHolder.restaurantAddress.setText(model.getAddress());

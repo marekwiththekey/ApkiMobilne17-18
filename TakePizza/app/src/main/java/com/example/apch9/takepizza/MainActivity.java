@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,7 +23,6 @@ import android.widget.Toast;
 import com.example.apch9.takepizza.Fragment.CartListFragment;
 import com.example.apch9.takepizza.Fragment.HistoryListFragment;
 import com.example.apch9.takepizza.Fragment.ProductListFragment;
-import com.example.apch9.takepizza.Fragment.RecommendedFragment;
 import com.example.apch9.takepizza.Fragment.RestaurantListFragment;
 import com.example.apch9.takepizza.Interface.ItemClickListener;
 import com.example.apch9.takepizza.Model.Restaurant;
@@ -92,10 +89,11 @@ public class MainActivity extends AppCompatActivity
         dbRef = database.getReference("Restaurant");
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_recommended);
+
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        moreRes = (Button)findViewById(R.id.moreRestaurants);
+        moreRes = (Button) findViewById(R.id.moreRestaurants);
         moreRes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,25 +106,30 @@ public class MainActivity extends AppCompatActivity
 
     private void getRestaurantList() {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Restaurant, RestaurantViewHolder>(Restaurant.class, R.layout.restaurant_item,
-                RestaurantViewHolder.class, dbRef.startAt("01").endAt("02")) {
+                RestaurantViewHolder.class, dbRef.orderByKey().startAt("01").endAt("02")) {
             @Override
             protected void populateViewHolder(RestaurantViewHolder viewHolder, Restaurant model, int position) {
+                System.out.println("recomended model: " + model);
+
                 viewHolder.restaurantName.setText(model.getName());
                 viewHolder.restaurantCity.setText(model.getCity());
                 viewHolder.restaurantAddress.setText(model.getAddress());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.restaurantImage);
-
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         Bundle bundle = new Bundle();
                         bundle.putString("restaurantId", firebaseRecyclerAdapter.getRef(position).getKey());
 
+                        fragment = new ProductListFragment();
+                        fragment.setArguments(bundle);
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.main_fragment, fragment);
+                        ft.commit();
                     }
                 });
 
                 final Restaurant local = model;
-
             }
         };
 
@@ -139,9 +142,7 @@ public class MainActivity extends AppCompatActivity
         if (user == null) {
             nav_Menu.findItem(R.id.nav_logout).setVisible(false);
             nav_Menu.findItem(R.id.nav_login).setVisible(true);
-        }
-        else
-        {
+        } else {
             nav_Menu.findItem(R.id.nav_logout).setVisible(true);
             nav_Menu.findItem(R.id.nav_login).setVisible(false);
         }
@@ -197,10 +198,11 @@ public class MainActivity extends AppCompatActivity
                     Toast.makeText(this, "You have been logged out", Toast.LENGTH_LONG).show();
                     Menu nav_Menu = navigationView.getMenu();
                     nav_Menu.findItem(R.id.nav_logout).setVisible(false);
-                    nav_Menu.findItem(R.id.nav_login).setVisible(true);                }
+                    nav_Menu.findItem(R.id.nav_login).setVisible(true);
+                }
                 break;
             case R.id.nav_login:
-                Intent intent = new Intent(this,LoginActivity.class);
+                Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.nav_menu:
